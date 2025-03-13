@@ -29,9 +29,9 @@ const Navbar = () => {
 
   const menuItems = [
     {
-      id: 'services ',
+      id: 'shop ',
       icon: '💻',
-      label: 'Services ',
+      label: 'Shop ',
       submenu: [
         { id: 'products', icon: '📦', label: 'Products' },
         { id: 'new-arrivals', icon: '🆕', label: 'New Arrivals' },
@@ -40,9 +40,9 @@ const Navbar = () => {
       ]
     },
     {
-      id: 'portfolio',
+      id: 'resource',
       icon: '🗃️',
-      label: 'Portfolio',
+      label: 'Resource',
       submenu: [
         { id: 'framer-motion', icon: '✨', label: 'Framer motion' },
         { id: 'navigation', icon: '🧭', label: 'Navigation' },
@@ -51,9 +51,9 @@ const Navbar = () => {
       ]
     },
     {
-      id: 'about-us',
+      id: 'menu',
       icon: '👓',
-      label: 'About Us',
+      label: 'Menu',
       submenu: [
         { id: 'settings', icon: '⚙️', label: 'Settings' },
         { id: 'profile', icon: '👤', label: 'Profile' },
@@ -61,28 +61,6 @@ const Navbar = () => {
         { id: 'logout', icon: '🚪', label: 'Logout' }
       ]
     },
-    {
-      id: 'blog',
-      icon: '📜',
-      label: 'Blog',
-      submenu: [
-        { id: 'settings', icon: '⚙️', label: 'Settings' },
-        { id: 'profile', icon: '👤', label: 'Profile' },
-        { id: 'help', icon: '❓', label: 'Help & FAQ' },
-        { id: 'logout', icon: '🚪', label: 'Logout' }
-      ]
-    },
-    {
-      id: 'contact',
-      icon: '📱',
-      label: 'Contact',
-      submenu: [
-        { id: 'settings', icon: '⚙️', label: 'Settings' },
-        { id: 'profile', icon: '👤', label: 'Profile' },
-        { id: 'help', icon: '❓', label: 'Help & FAQ' },
-        { id: 'logout', icon: '🚪', label: 'Logout' }
-      ]
-    }
   ];
 
   // Animation variants
@@ -217,7 +195,7 @@ const Navbar = () => {
 
   const getVisibleMenuItems = () => {
     if (scrolled) {
-      return menuItems.filter(item => item.id === 'services');
+      return menuItems.filter(item => item.id === 'menu');
     } else {
       return menuItems;
     }
@@ -237,7 +215,7 @@ const Navbar = () => {
       >
         <motion.div 
           // className="flex items-center gap-2 bg-gray-800 rounded-full px-4 py-2 text-gray-200 shadow-lg"
-          className="flex justify-between w-full max-w-4xl mx-auto items-center bg-gray-800 px-4 py-2 rounded-full text-gray-200 shadow-lg"
+          className="flex items-center gap-2 bg-gray-800 rounded-full px-4 py-2 text-gray-200 shadow-lg"
   
           animate={scrolled ? "scrolled" : "animate"}
           variants={navbarVariants}

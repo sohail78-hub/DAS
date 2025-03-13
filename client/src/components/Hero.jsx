@@ -24,7 +24,7 @@ const HeroSection = () => {
 
         <div className="w-full md:w-1/2 lg:w-1/3">
           <img
-            src="https://via.placeholder.com/500x400" //sohail sir ap apnay se add kr de image 
+            src="../assets/images/digi_agency.png" //sohail sir ap apnay se add kr de image 
             alt="Hero Illustration"
             className="w-full h-auto rounded-lg shadow-2xl"
           />
