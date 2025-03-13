@@ -20,6 +20,13 @@ const Navbar = () => {
     };
   }, [scrolled]);
 
+  // Defining parent menu hover colors
+  const menuColors = {
+    'shop': '#4F46E5', // Indigo
+    'resource': '#10B981', // Emerald
+    'menu': '#F59E0B' // Amber
+  };
+
   const menuItems = [
     {
       id: 'services ',
@@ -100,6 +107,24 @@ const Navbar = () => {
     tap: { scale: 0.95 }
   };
 
+  const quoteButtonVariants = {
+    initial: { scale: 1, opacity: 0, y: -10 },
+    animate: { 
+      scale: 1, 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        delay: 0.2,
+        duration: 0.3
+      }
+    },
+    hover: { 
+      scale: 1.05,
+      boxShadow: "0px 5px 15px rgba(255, 255, 255, 0.2)"
+    },
+    tap: { scale: 0.95 }
+  };
+
   const submenuVariants = {
     hidden: { 
       opacity: 0, 
@@ -129,6 +154,25 @@ const Navbar = () => {
       x: 0,
       transition: {
         duration: 0.3
+      }
+    }
+  };
+
+  const logoVariants = {
+    initial: { opacity: 0, x: -20 },
+    animate: { 
+      opacity: 1, 
+      x: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    },
+    hover: {
+      scale: 1.1,
+      rotate: [0, -5, 5, 0],
+      transition: {
+        duration: 0.5
       }
     }
   };
@@ -197,30 +241,65 @@ const Navbar = () => {
   
           animate={scrolled ? "scrolled" : "animate"}
           variants={navbarVariants}
-          style={{ width: scrolled ? '150px' : '80%' }}
+          style={{ width: scrolled ? '350px' : '550px' }}
         >
-          {getVisibleMenuItems().map((item) => (
-            <motion.button
-              key={item.id}
-              className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors duration-200 ${
-                activeMenu === item.id ? 'bg-gray-700' : ''
-              }`}
-              onMouseEnter={() => setActiveMenu(item.id)}
-              variants={menuButtonVariants}
-              initial="initial"
-              whileHover="hover"
-              whileTap="tap"
-              layout
-            >
-              <motion.span 
-                animate={{ rotate: activeMenu === item.id ? [0, -10, 10, -10, 0] : 0 }}
-                transition={{ duration: 0.5 }}
+          {/* Logo */}
+          <motion.div 
+            className="mr-2"
+            variants={logoVariants}
+            initial="initial"
+            animate="animate"
+            whileHover="hover"
+          >
+            <div className="flex items-center justify-center bg-gray-700 rounded-full h-8 w-8 overflow-hidden">
+              <span className="text-xl font-bold">🚀</span>
+            </div>
+          </motion.div>
+          
+          {/* Menu Items */}
+          <div className="flex-1 flex items-center">
+            {getVisibleMenuItems().map((item) => (
+              <motion.button
+                key={item.id}
+                className={`flex items-center gap-2 px-3 py-1 rounded-md transition-colors duration-200 ${
+                  activeMenu === item.id ? 'bg-gray-700' : ''
+                }`}
+                onMouseEnter={() => setActiveMenu(item.id)}
+                variants={menuButtonVariants}
+                initial="initial"
+                whileHover={{
+                  scale: 1.05,
+                  backgroundColor: menuColors[item.id] + '44', // Adding transparency for hover
+                  transition: { duration: 0.2 }
+                }}
+                whileTap="tap"
+                layout
+                style={{
+                  backgroundColor: activeMenu === item.id ? menuColors[item.id] + '66' : '', // Darker when active
+                }}
               >
-                {item.icon}
-              </motion.span>
-              <span>{item.label}</span>
-            </motion.button>
-          ))}
+                <motion.span 
+                  animate={{ rotate: activeMenu === item.id ? [0, -10, 10, -10, 0] : 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {item.icon}
+                </motion.span>
+                <span>{item.label}</span>
+              </motion.button>
+            ))}
+          </div>
+          
+          {/* Get a Quote Button */}
+          <motion.button
+            className="bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full px-4 py-1 font-medium ml-2"
+            variants={quoteButtonVariants}
+            initial="initial"
+            animate="animate"
+            whileHover="hover"
+            whileTap="tap"
+          >
+            Get a Quote
+          </motion.button>
         </motion.div>
 
         <AnimatePresence>
@@ -233,27 +312,23 @@ const Navbar = () => {
               animate="visible"
               exit="hidden"
               key={activeMenu}
-              style={{ width: '400px' }}
+              style={{ 
+                width: '400px',
+                borderTop: `3px solid ${menuColors[activeMenu]}` 
+              }}
             >
               <div className="flex flex-col gap-3">
                 {menuItems.find(item => item.id === activeMenu).submenu.map((subItem, index) => (
                   <motion.button
                     key={subItem.id}
-                    className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-700 transition-colors duration-200 text-left"
+                    className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors duration-200 text-left hover:bg-gray-700"
                     variants={submenuItemVariants}
                     custom={index}
                     whileHover={{ x: 5 }}
                   >
-                    <motion.span 
-                      className="w-6 h-6 flex items-center justify-center bg-gray-700 rounded-md"
-                      whileHover={{ 
-                        scale: 1.2,
-                        rotate: 5,
-                        transition: { duration: 0.2 }
-                      }}
-                    >
+                    <span className="w-6 h-6 flex items-center justify-center bg-gray-700 rounded-md">
                       {subItem.icon}
-                    </motion.span>
+                    </span>
                     <span>{subItem.label}</span>
                   </motion.button>
                 ))}
@@ -263,22 +338,6 @@ const Navbar = () => {
         </AnimatePresence>
       </motion.div>
 
-      
-   
-
-      {/* Page content  */}
-      <div className="pt-24 px-5">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl font-bold mb-4">Page Content</h1>
-          {Array(20).fill().map((_, i) => (
-            <p key={i} className="mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consequat, 
-              tortor eget ullamcorper finibus, leo quam faucibus orci, a varius ligula 
-              nisl nec velit. Ut tempus ex a libero vulputate, sit amet faucibus massa lacinia.
-            </p>
-          ))}
-        </div>
-      </div>
     </>
   );
 };
