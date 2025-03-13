@@ -22,9 +22,9 @@ const Navbar = () => {
 
   const menuItems = [
     {
-      id: 'shop',
-      icon: '🛒',
-      label: 'Shop',
+      id: 'services ',
+      icon: '💻',
+      label: 'Services ',
       submenu: [
         { id: 'products', icon: '📦', label: 'Products' },
         { id: 'new-arrivals', icon: '🆕', label: 'New Arrivals' },
@@ -33,9 +33,9 @@ const Navbar = () => {
       ]
     },
     {
-      id: 'resource',
-      icon: '📑',
-      label: 'Resource',
+      id: 'portfolio',
+      icon: '🗃️',
+      label: 'Portfolio',
       submenu: [
         { id: 'framer-motion', icon: '✨', label: 'Framer motion' },
         { id: 'navigation', icon: '🧭', label: 'Navigation' },
@@ -44,9 +44,31 @@ const Navbar = () => {
       ]
     },
     {
-      id: 'menu',
-      icon: '≡',
-      label: 'Menu',
+      id: 'about-us',
+      icon: '👓',
+      label: 'About Us',
+      submenu: [
+        { id: 'settings', icon: '⚙️', label: 'Settings' },
+        { id: 'profile', icon: '👤', label: 'Profile' },
+        { id: 'help', icon: '❓', label: 'Help & FAQ' },
+        { id: 'logout', icon: '🚪', label: 'Logout' }
+      ]
+    },
+    {
+      id: 'blog',
+      icon: '📜',
+      label: 'Blog',
+      submenu: [
+        { id: 'settings', icon: '⚙️', label: 'Settings' },
+        { id: 'profile', icon: '👤', label: 'Profile' },
+        { id: 'help', icon: '❓', label: 'Help & FAQ' },
+        { id: 'logout', icon: '🚪', label: 'Logout' }
+      ]
+    },
+    {
+      id: 'contact',
+      icon: '📱',
+      label: 'Contact',
       submenu: [
         { id: 'settings', icon: '⚙️', label: 'Settings' },
         { id: 'profile', icon: '👤', label: 'Profile' },
@@ -151,7 +173,7 @@ const Navbar = () => {
 
   const getVisibleMenuItems = () => {
     if (scrolled) {
-      return menuItems.filter(item => item.id === 'menu');
+      return menuItems.filter(item => item.id === 'services');
     } else {
       return menuItems;
     }
@@ -170,15 +192,17 @@ const Navbar = () => {
         }}
       >
         <motion.div 
-          className="flex items-center gap-2 bg-gray-800 rounded-full px-4 py-2 text-gray-200 shadow-lg"
+          // className="flex items-center gap-2 bg-gray-800 rounded-full px-4 py-2 text-gray-200 shadow-lg"
+          className="flex justify-between w-full max-w-4xl mx-auto items-center bg-gray-800 px-4 py-2 rounded-full text-gray-200 shadow-lg"
+  
           animate={scrolled ? "scrolled" : "animate"}
           variants={navbarVariants}
-          style={{ width: scrolled ? '150px' : '400px' }}
+          style={{ width: scrolled ? '150px' : '80%' }}
         >
           {getVisibleMenuItems().map((item) => (
             <motion.button
               key={item.id}
-              className={`flex items-center gap-2 px-3 py-1 rounded-md transition-colors duration-200 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors duration-200 ${
                 activeMenu === item.id ? 'bg-gray-700' : ''
               }`}
               onMouseEnter={() => setActiveMenu(item.id)}
