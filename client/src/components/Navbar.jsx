@@ -216,14 +216,25 @@ const Navbar = () => {
       >
         <motion.div 
           // className="flex items-center gap-2 bg-gray-800 rounded-full px-4 py-2 text-gray-200 shadow-lg"
-          className="flex items-center gap-2 bg-gray-800 rounded-full px-4 py-2 text-gray-200 shadow-lg"
+          className="flex items-center gap-2 bg-gray-800 rounded-full px-4 py-2 pb-0 text-gray-200 shadow-lg"
   
           animate={scrolled ? "scrolled" : "animate"}
           variants={navbarVariants}
           style={{ width: scrolled ? '350px' : '550px' }}
         >
           {/* Logo */}
-          <motion.div 
+<motion.div 
+  className="mr-4 flex items-center"
+  variants={logoVariants}
+  initial="initial"
+  animate="animate"
+  whileHover="hover"
+>
+  <img src="/da-log.png" alt="Logo" className="h-20 w-auto" />
+</motion.div>
+
+          {/* Logo */}
+          {/* <motion.div 
             className="mr-2"
             variants={logoVariants}
             initial="initial"
@@ -233,7 +244,7 @@ const Navbar = () => {
             <div className="flex items-center justify-center bg-gray-700 rounded-full h-8 w-8 overflow-hidden">
               <span className="text-xl font-bold">🚀</span>
             </div>
-          </motion.div>
+          </motion.div> */}
           
           {/* Menu Items */}
           <div className="flex-1 flex items-center">
@@ -284,7 +295,7 @@ const Navbar = () => {
         <AnimatePresence>
           {activeMenu && menuItems.find(item => item.id === activeMenu)?.submenu && (
             <motion.div 
-              className="absolute top-16 mt-2 p-4 bg-gray-800 rounded-xl text-gray-200 shadow-lg z-10 overflow-hidden"
+              className="absolute top-[100%] -mt-2 p-4 bg-gray-800 rounded-xl text-gray-200 shadow-lg z-10 overflow-hidden"
               onMouseLeave={() => setActiveMenu(null)}
               variants={submenuVariants}
               initial="hidden"
