@@ -18,15 +18,15 @@ const HeroSection = () => {
             <button className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-blue-600 transition duration-300">
               Learn More
             </button>
-      <button className="bg-yellow-400 text-gray-900 font-semibold py-3 px-8 rounded-lg hover:bg-yellow-500 transition duration-300">
-          Get a Quote
-        </button>
+            <button className="bg-yellow-400 text-gray-900 font-semibold py-3 px-8 rounded-lg hover:bg-yellow-500 transition duration-300 ml-auto">
+              Get a Quote
+            </button>
           </div>
         </div>
 
         <div className="w-full md:w-1/2 lg:w-2/5">
           <img
-            src="digi_agency.png" 
+            src="digi_agency.png"
             alt="Hero Illustration"
             className="w-full h-auto rounded-lg shadow-none"
           />

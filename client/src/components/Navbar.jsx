@@ -208,9 +208,10 @@ const Navbar = () => {
         initial="initial"
         animate="animate"
         variants={navbarVariants}
+
         style={{
-          backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.9)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(10px)' : 'none',
+          backgroundColor: 'transparent', // Always transparent
+          backdropFilter: 'none', // Remove blur effect
         }}
       >
         <motion.div 
@@ -267,7 +268,7 @@ const Navbar = () => {
             ))}
           </div>
           
-          {/* Get a Quote Button */}
+          {/* Get a Quote Button
           <motion.button
             className="bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full px-4 py-1 font-medium ml-2"
             variants={quoteButtonVariants}
@@ -277,7 +278,7 @@ const Navbar = () => {
             whileTap="tap"
           >
             Get a Quote
-          </motion.button>
+          </motion.button> */}
         </motion.div>
 
         <AnimatePresence>
