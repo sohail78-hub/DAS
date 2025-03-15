@@ -1,17 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(null);
   const [scrolled, setScrolled] = useState(false);
-  const [hovered, setHovered] = useState(false);  // State Variable to check Menu Mouse hover
+  const [hovered, setHovered] = useState(false);
+  const timeoutRef = useRef(null);
 
   const handleMouseEnter = () => {
+    clearTimeout(timeoutRef.current);
     setHovered(true);
   };
-  
+
   const handleMouseLeave = () => {
-    setHovered(false); // Mouse pointer Navbar se bahir jate hi hovered ko false karen
+    timeoutRef.current = setTimeout(() => {
+      setHovered(false);
+      setActiveMenu(null);
+    }, 200);
   };
 
   useEffect(() => {
@@ -28,17 +33,10 @@ const Navbar = () => {
     };
   }, [scrolled]);
 
-  useEffect(() => {
-    if (scrolled && !hovered) {
-      setActiveMenu(null); // Agar scrolled hai aur hovered nahi hai, to activeMenu ko null karen
-    }
-  }, [scrolled, hovered]);
-
-  // Defining parent menu hover colors
   const menuColors = {
-    'shop': '#4F46E5', // Indigo
-    'resource': '#10B981', // Emerald
-    'menu': '#F59E0B' // Amber
+    shop: '#4F46E5',
+    resource: '#10B981',
+    menu: '#F59E0B',
   };
 
   const menuItems = [
@@ -50,8 +48,8 @@ const Navbar = () => {
         { id: 'products', icon: '📦', label: 'Products' },
         { id: 'new-arrivals', icon: '🆕', label: 'New Arrivals' },
         { id: 'bestsellers', icon: '🏆', label: 'Bestsellers' },
-        { id: 'discounts', icon: '💰', label: 'Discounts' }
-      ]
+        { id: 'discounts', icon: '💰', label: 'Discounts' },
+      ],
     },
     {
       id: 'resource',
@@ -61,8 +59,8 @@ const Navbar = () => {
         { id: 'framer-motion', icon: '✨', label: 'Framer motion' },
         { id: 'navigation', icon: '🧭', label: 'Navigation' },
         { id: 'components', icon: '🧩', label: 'Components' },
-        { id: 'all-resource', icon: '📁', label: 'All resource' }
-      ]
+        { id: 'all-resource', icon: '📁', label: 'All resource' },
+      ],
     },
     {
       id: 'menu',
@@ -72,12 +70,11 @@ const Navbar = () => {
         { id: 'settings', icon: '⚙️', label: 'Settings' },
         { id: 'profile', icon: '👤', label: 'Profile' },
         { id: 'help', icon: '❓', label: 'Help & FAQ' },
-        { id: 'logout', icon: '🚪', label: 'Logout' }
-      ]
+        { id: 'logout', icon: '🚪', label: 'Logout' },
+      ],
     },
   ];
 
-  // Animation variants
   const navbarVariants = {
     initial: { opacity: 0, y: -20 },
     animate: {
@@ -85,40 +82,40 @@ const Navbar = () => {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
-      }
+        ease: 'easeOut',
+      },
     },
     scrolled: {
-      boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)"
-    }
+      boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.1)',
+    },
   };
 
   const menuButtonVariants = {
     initial: { scale: 1 },
     hover: { scale: 1.05 },
-    tap: { scale: 0.95 }
+    tap: { scale: 0.95 },
   };
 
   const submenuVariants = {
     hidden: {
       opacity: 0,
       y: -10,
-      clipPath: "inset(0% 0% 100% 0%)",
+      clipPath: 'inset(0% 0% 100% 0%)',
       transition: {
-        duration: 0.2
-      }
+        duration: 0.2,
+      },
     },
     visible: {
       opacity: 1,
       y: 0,
-      clipPath: "inset(0% 0% 0% 0%)",
+      clipPath: 'inset(0% 0% 0% 0%)',
       transition: {
         duration: 0.3,
-        ease: "easeOut",
+        ease: 'easeOut',
         staggerChildren: 0.05,
-        delayChildren: 0.1
-      }
-    }
+        delayChildren: 0.1,
+      },
+    },
   };
 
   const submenuItemVariants = {
@@ -127,9 +124,9 @@ const Navbar = () => {
       opacity: 1,
       x: 0,
       transition: {
-        duration: 0.3
-      }
-    }
+        duration: 0.3,
+      },
+    },
   };
 
   const logoVariants = {
@@ -139,23 +136,23 @@ const Navbar = () => {
       x: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
-      }
+        ease: 'easeOut',
+      },
     },
     hover: {
       scale: 1.1,
       rotate: [0, -5, 5, 0],
       transition: {
-        duration: 0.5
-      }
-    }
+        duration: 0.5,
+      },
+    },
   };
 
   const getVisibleMenuItems = () => {
     if (scrolled && !hovered) {
-      return []; // Scroll hone per hide
+      return [];
     } else {
-      return menuItems; // Center ya hover hone per show
+      return menuItems;
     }
   };
 
@@ -168,18 +165,17 @@ const Navbar = () => {
           left: scrolled && !hovered ? '20px' : '50%',
           transform: scrolled && !hovered ? 'translateX(0)' : 'translateX(-50%)',
         }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
       >
         <motion.div
           className="flex items-center gap-2 bg-gray-800 rounded-full px-4 py-2 text-gray-200 shadow-lg"
           style={{
-            width: hovered ? '550px' : (scrolled ? 'auto' : '550px'), // چوڑائی کا منطق
+            width: hovered ? '550px' : scrolled ? 'auto' : '550px',
             transition: 'all 0.5s ease-out',
           }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          {/* Logo */}
           <motion.div
             className="mr-4 flex items-center"
             variants={logoVariants}
@@ -190,15 +186,16 @@ const Navbar = () => {
             <img src="/da-log.png" alt="Logo" className="h-16 w-auto" />
           </motion.div>
 
-          {/* Menu Items */}
           <div className="flex-1 flex items-center">
             {getVisibleMenuItems().map((item) => (
               <motion.button
                 key={item.id}
-                className={`flex items-center gap-2 px-3 py-1 rounded-md transition-colors duration-200 ${activeMenu === item.id ? 'bg-gray-700' : ''}`}
+                className={`flex items-center gap-2 px-3 py-1 rounded-md transition-colors duration-200 ${
+                  activeMenu === item.id ? 'bg-gray-700' : ''
+                }`}
                 onMouseEnter={() => setActiveMenu(item.id)}
                 onMouseLeave={() => {
-                  if (!item.submenu) { // اگر submenu نہیں ہے تو activeMenu کو null کریں
+                  if (!item.submenu) {
                     setActiveMenu(null);
                   }
                 }}
@@ -207,7 +204,7 @@ const Navbar = () => {
                 whileHover={{
                   scale: 1.05,
                   backgroundColor: menuColors[item.id] + '44',
-                  transition: { duration: 0.2 }
+                  transition: { duration: 0.2 },
                 }}
                 whileTap="tap"
                 layout
@@ -227,16 +224,20 @@ const Navbar = () => {
           </div>
         </motion.div>
 
-        {/* سب مینو */}
         <AnimatePresence>
-          {activeMenu && menuItems.find(item => item.id === activeMenu)?.submenu && (
+          {activeMenu && menuItems.find((item) => item.id === activeMenu)?.submenu && (
             <motion.div
               className="absolute top-[100%] -mt-2 p-4 bg-gray-800 rounded-xl text-gray-200 shadow-lg z-10 overflow-hidden"
-              style={{ marginBottom: '20px' }} // Navbar ke neeche 20px area allocate kiya gaya hai
-              onMouseEnter={() => setHovered(true)} // سب مینو پر ہوور کرنے پر hovered کو true رکھیں
+              style={{ marginBottom: '20px' }}
+              onMouseEnter={() => {
+                clearTimeout(timeoutRef.current);
+                setHovered(true);
+              }}
               onMouseLeave={() => {
-                setActiveMenu(null); // سب مینو سے ہوور ہٹانے پر activeMenu کو null کریں
-                setHovered(false); // سب مینو سے ہوور ہٹانے پر hovered کو false کریں
+                timeoutRef.current = setTimeout(() => {
+                  setHovered(false);
+                  setActiveMenu(null);
+                }, 200);
               }}
               variants={submenuVariants}
               initial="hidden"
@@ -245,24 +246,26 @@ const Navbar = () => {
               key={activeMenu}
               style={{
                 width: '400px',
-                borderTop: `3px solid ${menuColors[activeMenu]}`
+                borderTop: `3px solid ${menuColors[activeMenu]}`,
               }}
             >
               <div className="flex flex-col gap-3">
-                {menuItems.find(item => item.id === activeMenu).submenu.map((subItem, index) => (
-                  <motion.button
-                    key={subItem.id}
-                    className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors duration-200 text-left hover:bg-gray-700"
-                    variants={submenuItemVariants}
-                    custom={index}
-                    whileHover={{ x: 5 }}
-                  >
-                    <span className="w-6 h-6 flex items-center justify-center bg-gray-700 rounded-md">
-                      {subItem.icon}
-                    </span>
-                    <span>{subItem.label}</span>
-                  </motion.button>
-                ))}
+                {menuItems
+                  .find((item) => item.id === activeMenu)
+                  .submenu.map((subItem, index) => (
+                    <motion.button
+                      key={subItem.id}
+                      className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors duration-200 text-left hover:bg-gray-700"
+                      variants={submenuItemVariants}
+                      custom={index}
+                      whileHover={{ x: 5 }}
+                    >
+                      <span className="w-6 h-6 flex items-center justify-center bg-gray-700 rounded-md">
+                        {subItem.icon}
+                      </span>
+                      <span>{subItem.label}</span>
+                    </motion.button>
+                  ))}
               </div>
             </motion.div>
           )}
