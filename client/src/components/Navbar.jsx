@@ -11,12 +11,7 @@ const Navbar = () => {
   };
   
   const handleMouseLeave = () => {
-    // تاخیر کے ساتھ hovered کو false کریں
-    setTimeout(() => {
-      if (!activeMenu) { // اگر کوئی فعال مینو نہیں ہے تو ہی hovered کو false کریں
-        setHovered(false);
-      }
-    }, 200); // 200ms delay
+    setHovered(false); // Mouse pointer Navbar se bahir jate hi hovered ko false karen
   };
 
   useEffect(() => {
@@ -32,6 +27,12 @@ const Navbar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [scrolled]);
+
+  useEffect(() => {
+    if (scrolled && !hovered) {
+      setActiveMenu(null); // Agar scrolled hai aur hovered nahi hai, to activeMenu ko null karen
+    }
+  }, [scrolled, hovered]);
 
   // Defining parent menu hover colors
   const menuColors = {
@@ -196,6 +197,11 @@ const Navbar = () => {
                 key={item.id}
                 className={`flex items-center gap-2 px-3 py-1 rounded-md transition-colors duration-200 ${activeMenu === item.id ? 'bg-gray-700' : ''}`}
                 onMouseEnter={() => setActiveMenu(item.id)}
+                onMouseLeave={() => {
+                  if (!item.submenu) { // اگر submenu نہیں ہے تو activeMenu کو null کریں
+                    setActiveMenu(null);
+                  }
+                }}
                 variants={menuButtonVariants}
                 initial="initial"
                 whileHover={{
@@ -226,12 +232,11 @@ const Navbar = () => {
           {activeMenu && menuItems.find(item => item.id === activeMenu)?.submenu && (
             <motion.div
               className="absolute top-[100%] -mt-2 p-4 bg-gray-800 rounded-xl text-gray-200 shadow-lg z-10 overflow-hidden"
-              onMouseEnter={handleMouseEnter} // سب مینو پر ہوور کرنے پر hovered کو true رکھیں
+              style={{ marginBottom: '20px' }} // Navbar ke neeche 20px area allocate kiya gaya hai
+              onMouseEnter={() => setHovered(true)} // سب مینو پر ہوور کرنے پر hovered کو true رکھیں
               onMouseLeave={() => {
-                setTimeout(() => {
-                  setActiveMenu(null);
-                  setHovered(false); // سب مینو سے ہوور ہٹانے پر hovered کو false کریں
-                }, 200);
+                setActiveMenu(null); // سب مینو سے ہوور ہٹانے پر activeMenu کو null کریں
+                setHovered(false); // سب مینو سے ہوور ہٹانے پر hovered کو false کریں
               }}
               variants={submenuVariants}
               initial="hidden"
