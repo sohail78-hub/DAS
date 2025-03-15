@@ -5,6 +5,17 @@ const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(null);
   const [scrolled, setScrolled] = useState(false);
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);  // State Variable to check Menu Mouse hover
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+  
+  const handleMouseLeave = () => {
+    setTimeout(() => {
+      setHovered(false);
+    }, 200); // 200ms delay for smooth transition
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,9 +40,9 @@ const Navbar = () => {
 
   const menuItems = [
     {
-      id: 'shop ',
+      id: 'shop',
       icon: '💻',
-      label: 'Shop ',
+      label: 'Shop',
       submenu: [
         { id: 'products', icon: '📦', label: 'Products' },
         { id: 'new-arrivals', icon: '🆕', label: 'New Arrivals' },
@@ -194,33 +205,34 @@ const Navbar = () => {
   };
 
   const getVisibleMenuItems = () => {
-    if (scrolled) {
-      return []; // hide all menu items when scrolled
+    if (scrolled && !hovered) {
+      return []; // Scroll hone per hide
     } else {
-      return menuItems; // Show all menu items when at the top
+      return menuItems; // Center ya hover hone per show
     }
   };
 
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 w-full flex justify-center z-50 pt-4 pb-4"
-        initial="initial"
-        animate="animate"
-        variants={navbarVariants}
-
-        style={{
-          backgroundColor: 'transparent', // Always transparent
-          backdropFilter: 'none', // Remove blur effect
-        }}
+       
+       className="fixed top-0 w-full flex justify-center z-50 pt-4 pb-4"
+       initial={{ left: '50%', transform: 'translateX(-50%)' }} // Centered initially
+       animate={{
+         left: scrolled && !hovered ? '20px' : '50%', // Move left on scroll
+         transform: scrolled && !hovered ? 'translateX(0)' : 'translateX(-50%)', 
+       }}
+       transition={{ duration: 0.5, ease: "easeOut" }}
+      
       >
         <motion.div
-          // className="flex items-center gap-2 bg-gray-800 rounded-full px-4 py-2 text-gray-200 shadow-lg"
-          className={`flex items-center justify-${scrolled ? 'center' : 'start'} gap-2 bg-gray-800 rounded-full px-4 py-2 pb-0 text-gray-200 shadow-lg`}
-
-          animate={scrolled ? "scrolled" : "animate"}
-          variants={navbarVariants}
-          style={{ width: scrolled ? 'auto' : '550px', padding: scrolled ? '10px 20px' : '10px 40px' }}
+          className="flex items-center gap-2 bg-gray-800 rounded-full px-4 py-2 text-gray-200 shadow-lg"
+  style={{
+    width: hovered ? '550px' : (scrolled ? 'auto' : '550px'),
+    transition: 'all 0.5s ease-out',
+  }}
+  onMouseEnter={handleMouseEnter}
+  onMouseLeave={handleMouseLeave}
         >
           {/* Logo */}
           <motion.div
@@ -247,7 +259,7 @@ const Navbar = () => {
           </motion.div> */}
 
           {/* Logo Always Visible */}
-   
+
           {/* Menu Items */}
           <div className="flex-1 flex items-center">
             {getVisibleMenuItems().map((item) => (
@@ -297,7 +309,13 @@ const Navbar = () => {
           {activeMenu && menuItems.find(item => item.id === activeMenu)?.submenu && (
             <motion.div
               className="absolute top-[100%] -mt-2 p-4 bg-gray-800 rounded-xl text-gray-200 shadow-lg z-10 overflow-hidden"
-              onMouseLeave={() => setActiveMenu(null)}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={() => {
+                setTimeout(() => {
+                  setActiveMenu(null);
+                  setHovered(false);
+                }, 200); // 200ms delay to allow smooth transition
+              }}
               variants={submenuVariants}
               initial="hidden"
               animate="visible"
