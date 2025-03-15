@@ -66,8 +66,8 @@ const Navbar = () => {
   // Animation variants
   const navbarVariants = {
     initial: { opacity: 0, y: -20 },
-    animate: { 
-      opacity: 1, 
+    animate: {
+      opacity: 1,
       y: 0,
       transition: {
         duration: 0.5,
@@ -87,16 +87,16 @@ const Navbar = () => {
 
   const quoteButtonVariants = {
     initial: { scale: 1, opacity: 0, y: -10 },
-    animate: { 
-      scale: 1, 
-      opacity: 1, 
+    animate: {
+      scale: 1,
+      opacity: 1,
       y: 0,
       transition: {
         delay: 0.2,
         duration: 0.3
       }
     },
-    hover: { 
+    hover: {
       scale: 1.05,
       boxShadow: "0px 5px 15px rgba(255, 255, 255, 0.2)"
     },
@@ -104,16 +104,16 @@ const Navbar = () => {
   };
 
   const submenuVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       y: -10,
       clipPath: "inset(0% 0% 100% 0%)",
       transition: {
         duration: 0.2
       }
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       clipPath: "inset(0% 0% 0% 0%)",
       transition: {
@@ -127,8 +127,8 @@ const Navbar = () => {
 
   const submenuItemVariants = {
     hidden: { opacity: 0, x: -20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       x: 0,
       transition: {
         duration: 0.3
@@ -138,8 +138,8 @@ const Navbar = () => {
 
   const logoVariants = {
     initial: { opacity: 0, x: -20 },
-    animate: { 
-      opacity: 1, 
+    animate: {
+      opacity: 1,
       x: 0,
       transition: {
         duration: 0.5,
@@ -156,14 +156,14 @@ const Navbar = () => {
   };
 
   const sideMenuVariants = {
-    hidden: { 
+    hidden: {
       x: -250,
       opacity: 0,
       transition: {
         duration: 0.3
       }
     },
-    visible: { 
+    visible: {
       x: 0,
       opacity: 1,
       transition: {
@@ -176,8 +176,8 @@ const Navbar = () => {
 
   const sideMenuButtonVariants = {
     initial: { x: -50, opacity: 0 },
-    animate: { 
-      x: 0, 
+    animate: {
+      x: 0,
       opacity: 1,
       transition: {
         delay: 0.3,
@@ -195,15 +195,15 @@ const Navbar = () => {
 
   const getVisibleMenuItems = () => {
     if (scrolled) {
-      return menuItems.filter(item => item.id === 'menu');
+      return []; // hide all menu items when scrolled
     } else {
-      return menuItems;
+      return menuItems; // Show all menu items when at the top
     }
   };
 
   return (
     <>
-      <motion.div 
+      <motion.div
         className="fixed top-0 left-0 w-full flex justify-center z-50 pt-4 pb-4"
         initial="initial"
         animate="animate"
@@ -214,24 +214,24 @@ const Navbar = () => {
           backdropFilter: 'none', // Remove blur effect
         }}
       >
-        <motion.div 
+        <motion.div
           // className="flex items-center gap-2 bg-gray-800 rounded-full px-4 py-2 text-gray-200 shadow-lg"
-          className="flex items-center gap-2 bg-gray-800 rounded-full px-4 py-2 pb-0 text-gray-200 shadow-lg"
-  
+          className={`flex items-center justify-${scrolled ? 'center' : 'start'} gap-2 bg-gray-800 rounded-full px-4 py-2 pb-0 text-gray-200 shadow-lg`}
+
           animate={scrolled ? "scrolled" : "animate"}
           variants={navbarVariants}
-          style={{ width: scrolled ? '350px' : '550px' }}
+          style={{ width: scrolled ? 'auto' : '550px', padding: scrolled ? '10px 20px' : '10px 40px' }}
         >
           {/* Logo */}
-<motion.div 
-  className="mr-4 flex items-center"
-  variants={logoVariants}
-  initial="initial"
-  animate="animate"
-  whileHover="hover"
->
-  <img src="/da-log.png" alt="Logo" className="h-20 w-auto" />
-</motion.div>
+          <motion.div
+            className="mr-4 flex items-center"
+            variants={logoVariants}
+            initial="initial"
+            animate="animate"
+            whileHover="hover"
+          >
+            <img src="/da-log.png" alt="Logo" className="h-16 w-auto" />
+          </motion.div>
 
           {/* Logo */}
           {/* <motion.div 
@@ -245,15 +245,16 @@ const Navbar = () => {
               <span className="text-xl font-bold">🚀</span>
             </div>
           </motion.div> */}
-          
+
+          {/* Logo Always Visible */}
+   
           {/* Menu Items */}
           <div className="flex-1 flex items-center">
             {getVisibleMenuItems().map((item) => (
               <motion.button
                 key={item.id}
-                className={`flex items-center gap-2 px-3 py-1 rounded-md transition-colors duration-200 ${
-                  activeMenu === item.id ? 'bg-gray-700' : ''
-                }`}
+                className={`flex items-center gap-2 px-3 py-1 rounded-md transition-colors duration-200 ${activeMenu === item.id ? 'bg-gray-700' : ''
+                  }`}
                 onMouseEnter={() => setActiveMenu(item.id)}
                 variants={menuButtonVariants}
                 initial="initial"
@@ -268,7 +269,7 @@ const Navbar = () => {
                   backgroundColor: activeMenu === item.id ? menuColors[item.id] + '66' : '', // Darker when active
                 }}
               >
-                <motion.span 
+                <motion.span
                   animate={{ rotate: activeMenu === item.id ? [0, -10, 10, -10, 0] : 0 }}
                   transition={{ duration: 0.5 }}
                 >
@@ -278,7 +279,7 @@ const Navbar = () => {
               </motion.button>
             ))}
           </div>
-          
+
           {/* Get a Quote Button
           <motion.button
             className="bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full px-4 py-1 font-medium ml-2"
@@ -294,7 +295,7 @@ const Navbar = () => {
 
         <AnimatePresence>
           {activeMenu && menuItems.find(item => item.id === activeMenu)?.submenu && (
-            <motion.div 
+            <motion.div
               className="absolute top-[100%] -mt-2 p-4 bg-gray-800 rounded-xl text-gray-200 shadow-lg z-10 overflow-hidden"
               onMouseLeave={() => setActiveMenu(null)}
               variants={submenuVariants}
@@ -302,9 +303,9 @@ const Navbar = () => {
               animate="visible"
               exit="hidden"
               key={activeMenu}
-              style={{ 
+              style={{
                 width: '400px',
-                borderTop: `3px solid ${menuColors[activeMenu]}` 
+                borderTop: `3px solid ${menuColors[activeMenu]}`
               }}
             >
               <div className="flex flex-col gap-3">
