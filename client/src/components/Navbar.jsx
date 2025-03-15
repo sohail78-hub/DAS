@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(null);
   const [scrolled, setScrolled] = useState(false);
-  const [sideMenuOpen, setSideMenuOpen] = useState(false);
   const [hovered, setHovered] = useState(false);  // State Variable to check Menu Mouse hover
 
   const handleMouseEnter = () => {
@@ -12,9 +11,12 @@ const Navbar = () => {
   };
   
   const handleMouseLeave = () => {
+    // تاخیر کے ساتھ hovered کو false کریں
     setTimeout(() => {
-      setHovered(false);
-    }, 200); // 200ms delay for smooth transition
+      if (!activeMenu) { // اگر کوئی فعال مینو نہیں ہے تو ہی hovered کو false کریں
+        setHovered(false);
+      }
+    }, 200); // 200ms delay
   };
 
   useEffect(() => {
@@ -96,24 +98,6 @@ const Navbar = () => {
     tap: { scale: 0.95 }
   };
 
-  const quoteButtonVariants = {
-    initial: { scale: 1, opacity: 0, y: -10 },
-    animate: {
-      scale: 1,
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 0.2,
-        duration: 0.3
-      }
-    },
-    hover: {
-      scale: 1.05,
-      boxShadow: "0px 5px 15px rgba(255, 255, 255, 0.2)"
-    },
-    tap: { scale: 0.95 }
-  };
-
   const submenuVariants = {
     hidden: {
       opacity: 0,
@@ -166,44 +150,6 @@ const Navbar = () => {
     }
   };
 
-  const sideMenuVariants = {
-    hidden: {
-      x: -250,
-      opacity: 0,
-      transition: {
-        duration: 0.3
-      }
-    },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 30
-      }
-    }
-  };
-
-  const sideMenuButtonVariants = {
-    initial: { x: -50, opacity: 0 },
-    animate: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        delay: 0.3,
-        duration: 0.3
-      }
-    },
-    hidden: {
-      x: -50,
-      opacity: 0,
-      transition: {
-        duration: 0.3
-      }
-    }
-  };
-
   const getVisibleMenuItems = () => {
     if (scrolled && !hovered) {
       return []; // Scroll hone per hide
@@ -215,24 +161,22 @@ const Navbar = () => {
   return (
     <>
       <motion.div
-       
-       className="fixed top-0 w-full flex justify-center z-50 pt-4 pb-4"
-       initial={{ left: '50%', transform: 'translateX(-50%)' }} // Centered initially
-       animate={{
-         left: scrolled && !hovered ? '20px' : '50%', // Move left on scroll
-         transform: scrolled && !hovered ? 'translateX(0)' : 'translateX(-50%)', 
-       }}
-       transition={{ duration: 0.5, ease: "easeOut" }}
-      
+        className="fixed top-0 w-full flex justify-center z-50 pt-4 pb-4"
+        initial={{ left: '50%', transform: 'translateX(-50%)' }}
+        animate={{
+          left: scrolled && !hovered ? '20px' : '50%',
+          transform: scrolled && !hovered ? 'translateX(0)' : 'translateX(-50%)',
+        }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <motion.div
           className="flex items-center gap-2 bg-gray-800 rounded-full px-4 py-2 text-gray-200 shadow-lg"
-  style={{
-    width: hovered ? '550px' : (scrolled ? 'auto' : '550px'),
-    transition: 'all 0.5s ease-out',
-  }}
-  onMouseEnter={handleMouseEnter}
-  onMouseLeave={handleMouseLeave}
+          style={{
+            width: hovered ? '550px' : (scrolled ? 'auto' : '550px'), // چوڑائی کا منطق
+            transition: 'all 0.5s ease-out',
+          }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           {/* Logo */}
           <motion.div
@@ -245,40 +189,24 @@ const Navbar = () => {
             <img src="/da-log.png" alt="Logo" className="h-16 w-auto" />
           </motion.div>
 
-          {/* Logo */}
-          {/* <motion.div 
-            className="mr-2"
-            variants={logoVariants}
-            initial="initial"
-            animate="animate"
-            whileHover="hover"
-          >
-            <div className="flex items-center justify-center bg-gray-700 rounded-full h-8 w-8 overflow-hidden">
-              <span className="text-xl font-bold">🚀</span>
-            </div>
-          </motion.div> */}
-
-          {/* Logo Always Visible */}
-
           {/* Menu Items */}
           <div className="flex-1 flex items-center">
             {getVisibleMenuItems().map((item) => (
               <motion.button
                 key={item.id}
-                className={`flex items-center gap-2 px-3 py-1 rounded-md transition-colors duration-200 ${activeMenu === item.id ? 'bg-gray-700' : ''
-                  }`}
+                className={`flex items-center gap-2 px-3 py-1 rounded-md transition-colors duration-200 ${activeMenu === item.id ? 'bg-gray-700' : ''}`}
                 onMouseEnter={() => setActiveMenu(item.id)}
                 variants={menuButtonVariants}
                 initial="initial"
                 whileHover={{
                   scale: 1.05,
-                  backgroundColor: menuColors[item.id] + '44', // Adding transparency for hover
+                  backgroundColor: menuColors[item.id] + '44',
                   transition: { duration: 0.2 }
                 }}
                 whileTap="tap"
                 layout
                 style={{
-                  backgroundColor: activeMenu === item.id ? menuColors[item.id] + '66' : '', // Darker when active
+                  backgroundColor: activeMenu === item.id ? menuColors[item.id] + '66' : '',
                 }}
               >
                 <motion.span
@@ -291,30 +219,19 @@ const Navbar = () => {
               </motion.button>
             ))}
           </div>
-
-          {/* Get a Quote Button
-          <motion.button
-            className="bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full px-4 py-1 font-medium ml-2"
-            variants={quoteButtonVariants}
-            initial="initial"
-            animate="animate"
-            whileHover="hover"
-            whileTap="tap"
-          >
-            Get a Quote
-          </motion.button> */}
         </motion.div>
 
+        {/* سب مینو */}
         <AnimatePresence>
           {activeMenu && menuItems.find(item => item.id === activeMenu)?.submenu && (
             <motion.div
               className="absolute top-[100%] -mt-2 p-4 bg-gray-800 rounded-xl text-gray-200 shadow-lg z-10 overflow-hidden"
-              onMouseEnter={handleMouseEnter}
+              onMouseEnter={handleMouseEnter} // سب مینو پر ہوور کرنے پر hovered کو true رکھیں
               onMouseLeave={() => {
                 setTimeout(() => {
                   setActiveMenu(null);
-                  setHovered(false);
-                }, 200); // 200ms delay to allow smooth transition
+                  setHovered(false); // سب مینو سے ہوور ہٹانے پر hovered کو false کریں
+                }, 200);
               }}
               variants={submenuVariants}
               initial="hidden"
@@ -346,7 +263,6 @@ const Navbar = () => {
           )}
         </AnimatePresence>
       </motion.div>
-
     </>
   );
 };
