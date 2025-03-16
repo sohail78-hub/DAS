@@ -160,19 +160,16 @@ const Navbar = () => {
     <>
       <motion.div
         className="fixed top-0 w-full flex justify-center z-50 pt-4 pb-4"
-        initial={{ left: '50%', transform: 'translateX(-50%)' }}
+        initial={{ left: '50%', x: '-50%', width: '550px' }} // Center the Navbar initially
         animate={{
-          left: scrolled && !hovered ? '20px' : '50%',
-          transform: scrolled && !hovered ? 'translateX(0)' : 'translateX(-50%)',
+          left: scrolled && !hovered ? '20px' : '50%', // Move to left on scroll
+          x: scrolled && !hovered ? '0' : '-50%', // Adjust transform for centering
+          width: hovered ? '550px' : scrolled ? 'auto' : '550px', // Adjust width
         }}
-        transition={{ duration: 0.5, ease: 'easeIn' }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
       >
         <motion.div
           className="flex items-center gap-2 bg-gray-800 rounded-full px-4 py-2 text-gray-200 shadow-lg"
-          style={{
-            width: hovered ? '550px' : scrolled ? 'auto' : '550px',
-            transition: 'width 1s ease-out', // Transition duration increased to 1s
-          }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
