@@ -165,13 +165,13 @@ const Navbar = () => {
           left: scrolled && !hovered ? '20px' : '50%',
           transform: scrolled && !hovered ? 'translateX(0)' : 'translateX(-50%)',
         }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
+        transition={{ duration: 0.5, ease: 'easeIn' }}
       >
         <motion.div
           className="flex items-center gap-2 bg-gray-800 rounded-full px-4 py-2 text-gray-200 shadow-lg"
           style={{
             width: hovered ? '550px' : scrolled ? 'auto' : '550px',
-            transition: 'all 0.5s ease-out',
+            transition: 'width 1s ease-out', // Transition duration increased to 1s
           }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
