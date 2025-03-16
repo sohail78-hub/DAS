@@ -162,8 +162,8 @@ const Navbar = () => {
         className="fixed top-0 w-full flex justify-center z-50 pt-4 pb-4"
         initial={{ left: '50%', x: '-50%', width: '550px' }} // Center the Navbar initially
         animate={{
-          left: scrolled && !hovered ? '20px' : '50%', // Move to left on scroll
-          x: scrolled && !hovered ? '0' : '-50%', // Adjust transform for centering
+          left: scrolled ? '20px' : '50%', // Move to left on scroll
+          x: scrolled ? '0' : '-50%', // Adjust transform for centering
           width: hovered ? '550px' : scrolled ? 'auto' : '550px', // Adjust width
         }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
