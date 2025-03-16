@@ -90,6 +90,11 @@ const ServicesSection = () => {
     pauseSlider();
   };
 
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+    pauseSlider();
+  };
+
   return (
     <section className="py-16 bg-gradient-to-r from-blue-500 to-purple-600 relative">
       <div className="container mx-auto px-4">
@@ -100,7 +105,7 @@ const ServicesSection = () => {
         <div className="relative overflow-hidden">
           {/* Slider Container */}
           <div
-            className="flex transition-transform duration-500 ease-in-out"
+            className="flex transition-transform duration-1500 ease-in-out" // Updated to 1500ms
             style={{
               transform: `translateX(-${currentIndex * (100 / 4)}%)`, // Move by 1 card
             }}
@@ -141,16 +146,29 @@ const ServicesSection = () => {
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-4 rounded-full shadow-lg hover:bg-opacity-75 transition-all duration-300 text-2xl"
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 w3-left w3-hover-text-khaki text-4xl text-white ml-5" // Added 20px margin (ml-5)
         >
-          &lt;
+          &#10094;
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-4 rounded-full shadow-lg hover:bg-opacity-75 transition-all duration-300 text-2xl"
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 w3-right w3-hover-text-khaki text-4xl text-white mr-5" // Added 20px margin (mr-5)
         >
-          &gt;
+          &#10095;
         </button>
+
+        {/* Dot Indicators */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          {services.map((_, index) => (
+            <button
+              key={index}
+              className={`w-3 h-3 rounded-full transition-colors duration-300 ${
+                index === currentIndex ? 'bg-white' : 'bg-gray-400'
+              }`}
+              onClick={() => goToSlide(index)}
+            ></button>
+          ))}
+        </div>
       </div>
     </section>
   );
