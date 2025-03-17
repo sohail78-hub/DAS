@@ -28,7 +28,7 @@ const HeroSection = () => {
           <img
             src="digi_agency.png"
             alt="Hero Illustration"
-            className="w-full h-auto rounded-lg shadow-none"
+            className="w-full h-auto rounded-lg "
           />
         </div>
       </div>
