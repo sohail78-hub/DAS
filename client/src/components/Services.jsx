@@ -60,37 +60,15 @@ const ServicesSection = () => {
     },
   ];
 
-  // Duplicate the cards for seamless looping
   const loopedServices = [...services, ...services];
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef(null);
 
-  // Auto-play slider
   const startAutoPlay = () => {
     intervalRef.current = setInterval(() => {
-      setCurrentIndex((prevIndex) => {
-        const newIndex = prevIndex + 1;
-        if (newIndex >= loopedServices.length) {
-          // Smoothly reset to the first card
-          setTimeout(() => {
-            setCurrentIndex(0);
-          }, 1500); // Wait for the transition to complete
-        }
-        return newIndex % loopedServices.length;
-      });
-    }, 3000); // Change slide every 3 seconds
-  };
-
-  // Pause slider for 10 seconds
-  const pauseSlider = () => {
-    setIsPaused(true);
-    clearInterval(intervalRef.current);
-    setTimeout(() => {
-      setIsPaused(false);
-      startAutoPlay();
-    }, 10000); // Pause for 10 seconds
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % loopedServices.length);
+    }, 3000);
   };
 
   useEffect(() => {
@@ -100,37 +78,13 @@ const ServicesSection = () => {
     return () => clearInterval(intervalRef.current);
   }, [isPaused]);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => {
-      const newIndex = prevIndex + 1;
-      if (newIndex >= loopedServices.length) {
-        // Smoothly reset to the first card
-        setTimeout(() => {
-          setCurrentIndex(0);
-        }, 1500); // Wait for the transition to complete
-      }
-      return newIndex % loopedServices.length;
-    });
-    pauseSlider();
+  const pauseSlider = () => {
+    setIsPaused(true);
+    clearInterval(intervalRef.current);
   };
 
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => {
-      const newIndex = prevIndex - 1;
-      if (newIndex < 0) {
-        // Smoothly reset to the last card
-        setTimeout(() => {
-          setCurrentIndex(loopedServices.length - 1);
-        }, 1500); // Wait for the transition to complete
-      }
-      return newIndex < 0 ? loopedServices.length - 1 : newIndex;
-    });
-    pauseSlider();
-  };
-
-  const goToSlide = (index) => {
-    setCurrentIndex(index);
-    pauseSlider();
+  const resumeSlider = () => {
+    setIsPaused(false);
   };
 
   return (
@@ -141,32 +95,29 @@ const ServicesSection = () => {
         </h2>
 
         <div className="relative overflow-hidden">
-          {/* Slider Container */}
           <div
             className="flex transition-transform duration-1500 ease-in-out"
             style={{
-              transform: `translateX(-${currentIndex * (100 / 4)}%)`, // Move by 1 card
+              transform: `translateX(-${currentIndex * (100 / 4)}%)`,
             }}
           >
-            {/* Render the services in a circular manner */}
             {loopedServices.map((service, index) => (
               <div
-                key={index} // Use index as key since the cards are duplicated
+                key={index}
                 className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 px-4"
+                onMouseEnter={pauseSlider}
+                onMouseLeave={resumeSlider}
               >
-                <div className="group bg-gradient-to-r from-white to-gray-100 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 h-full flex flex-col">
+                <div className="group bg-gradient-to-r from-white to-gray-100 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 h-full flex flex-col">
                   <div className="text-5xl text-center text-blue-600 mb-6 transition-transform duration-300 group-hover:rotate-12">
                     {service.icon}
                   </div>
-
                   <h3 className="text-xl font-semibold text-gray-800 mb-4 text-center">
                     {service.title}
                   </h3>
-
                   <p className="text-gray-600 text-center mb-6 flex-grow">
                     {service.description}
                   </p>
-
                   <div className="text-center">
                     <a
                       href="#"
@@ -181,21 +132,19 @@ const ServicesSection = () => {
           </div>
         </div>
 
-        {/* Navigation Arrows */}
         <button
-          onClick={prevSlide}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 w3-left w3-hover-text-khaki text-4xl text-white ml-5"
+          onClick={() => setCurrentIndex((prev) => (prev - 1 + loopedServices.length) % loopedServices.length)}
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 text-4xl text-white ml-5"
         >
           &#10094;
         </button>
         <button
-          onClick={nextSlide}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 w3-right w3-hover-text-khaki text-4xl text-white mr-5"
+          onClick={() => setCurrentIndex((prev) => (prev + 1) % loopedServices.length)}
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 text-4xl text-white mr-5"
         >
           &#10095;
         </button>
 
-        {/* Dot Indicators */}
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {services.map((_, index) => (
             <button
@@ -203,7 +152,7 @@ const ServicesSection = () => {
               className={`w-3 h-3 rounded-full transition-colors duration-300 ${
                 index === currentIndex % services.length ? 'bg-white' : 'bg-gray-400'
               }`}
-              onClick={() => goToSlide(index)}
+              onClick={() => setCurrentIndex(index)}
             ></button>
           ))}
         </div>
