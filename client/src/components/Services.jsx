@@ -63,7 +63,9 @@ const ServicesSection = () => {
   const loopedServices = [...services, ...services];
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null); // Track hovered card index
   const intervalRef = useRef(null);
+  const timeoutRef = useRef(null); // For resetting after mouse leave
 
   const startAutoPlay = () => {
     intervalRef.current = setInterval(() => {
@@ -87,11 +89,33 @@ const ServicesSection = () => {
     setIsPaused(false);
   };
 
-  // Function to calculate the scale of each card based on its position relative to the center
+  // Function to calculate the scale of each card based on its position relative to the center or hovered card
   const getCardSize = (index) => {
-    const centerOffset = 2; // The center card is the 3rd card (index 2 when 5 cards are visible)
-    const distance = Math.abs(index - currentIndex - centerOffset);
-    return 1 - Math.min(distance * 0.15, 0.6); // Adjust scaling factor as needed
+    if (hoveredIndex !== null) {
+      // If a card is hovered, make it larger and others smaller
+      return index === hoveredIndex ? 1 : 0.8;
+    } else {
+      // If no card is hovered, make the center card larger and others smaller
+      const centerOffset = 2; // The center card is the 3rd card (index 2 when 5 cards are visible)
+      const distance = Math.abs(index - currentIndex - centerOffset);
+      return 1 - Math.min(distance * 0.15, 0.6); // Adjust scaling factor as needed
+    }
+  };
+
+  // Handle mouse enter (hover) on a card
+  const handleMouseEnter = (index) => {
+    pauseSlider(); // Pause the slider
+    setHoveredIndex(index); // Set the hovered card index
+    clearTimeout(timeoutRef.current); // Clear any existing timeout
+  };
+
+  // Handle mouse leave from a card
+  const handleMouseLeave = () => {
+    // Set a timeout to reset the hovered index after 3 seconds
+    timeoutRef.current = setTimeout(() => {
+      setHoveredIndex(null); // Reset hovered card index
+      resumeSlider(); // Resume the slider
+    }, 3000);
   };
 
   return (
@@ -114,8 +138,8 @@ const ServicesSection = () => {
                 <div
                   key={index}
                   className="w-full sm:w-1/1 md:w-1/3 lg:w-1/5 flex-shrink-0 px-2"
-                  onMouseEnter={pauseSlider}
-                  onMouseLeave={resumeSlider}
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={handleMouseLeave}
                   style={{ transform: `scale(${scale})`, transition: 'transform 0.5s ease' }}
                 >
                   <div className="group bg-gradient-to-r from-white to-gray-100 p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col">
