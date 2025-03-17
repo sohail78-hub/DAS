@@ -44,7 +44,24 @@ const ServicesSection = () => {
       description: 'Data-driven insights to make informed decisions.',
       cta: 'Learn More',
     },
+    {
+      id: 7,
+      icon: '🚀',
+      title: 'Cloud Solutions',
+      description: 'Scalable and secure cloud infrastructure for your business.',
+      cta: 'Learn More',
+    },
+    {
+      id: 8,
+      icon: '🤖',
+      title: 'AI & Machine Learning',
+      description: 'Intelligent solutions to automate and optimize processes.',
+      cta: 'Learn More',
+    },
   ];
+
+  // Duplicate the cards for seamless looping
+  const loopedServices = [...services, ...services];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -53,9 +70,16 @@ const ServicesSection = () => {
   // Auto-play slider
   const startAutoPlay = () => {
     intervalRef.current = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === services.length - 1 ? 0 : prevIndex + 1
-      );
+      setCurrentIndex((prevIndex) => {
+        const newIndex = prevIndex + 1;
+        if (newIndex >= loopedServices.length) {
+          // Smoothly reset to the first card
+          setTimeout(() => {
+            setCurrentIndex(0);
+          }, 1500); // Wait for the transition to complete
+        }
+        return newIndex % loopedServices.length;
+      });
     }, 3000); // Change slide every 3 seconds
   };
 
@@ -77,16 +101,30 @@ const ServicesSection = () => {
   }, [isPaused]);
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === services.length - 1 ? 0 : prevIndex + 1
-    );
+    setCurrentIndex((prevIndex) => {
+      const newIndex = prevIndex + 1;
+      if (newIndex >= loopedServices.length) {
+        // Smoothly reset to the first card
+        setTimeout(() => {
+          setCurrentIndex(0);
+        }, 1500); // Wait for the transition to complete
+      }
+      return newIndex % loopedServices.length;
+    });
     pauseSlider();
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? services.length - 1 : prevIndex - 1
-    );
+    setCurrentIndex((prevIndex) => {
+      const newIndex = prevIndex - 1;
+      if (newIndex < 0) {
+        // Smoothly reset to the last card
+        setTimeout(() => {
+          setCurrentIndex(loopedServices.length - 1);
+        }, 1500); // Wait for the transition to complete
+      }
+      return newIndex < 0 ? loopedServices.length - 1 : newIndex;
+    });
     pauseSlider();
   };
 
@@ -105,15 +143,15 @@ const ServicesSection = () => {
         <div className="relative overflow-hidden">
           {/* Slider Container */}
           <div
-            className="flex transition-transform duration-1500 ease-in-out" // Updated to 1500ms
+            className="flex transition-transform duration-1500 ease-in-out"
             style={{
               transform: `translateX(-${currentIndex * (100 / 4)}%)`, // Move by 1 card
             }}
           >
             {/* Render the services in a circular manner */}
-            {services.map((service, index) => (
+            {loopedServices.map((service, index) => (
               <div
-                key={service.id}
+                key={index} // Use index as key since the cards are duplicated
                 className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 px-4"
               >
                 <div className="group bg-gradient-to-r from-white to-gray-100 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 h-full flex flex-col">
@@ -146,13 +184,13 @@ const ServicesSection = () => {
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 w3-left w3-hover-text-khaki text-4xl text-white ml-5" // Added 20px margin (ml-5)
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 w3-left w3-hover-text-khaki text-4xl text-white ml-5"
         >
           &#10094;
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 w3-right w3-hover-text-khaki text-4xl text-white mr-5" // Added 20px margin (mr-5)
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 w3-right w3-hover-text-khaki text-4xl text-white mr-5"
         >
           &#10095;
         </button>
@@ -163,7 +201,7 @@ const ServicesSection = () => {
             <button
               key={index}
               className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-                index === currentIndex ? 'bg-white' : 'bg-gray-400'
+                index === currentIndex % services.length ? 'bg-white' : 'bg-gray-400'
               }`}
               onClick={() => goToSlide(index)}
             ></button>
