@@ -98,30 +98,30 @@ const ServicesSection = () => {
           <div
             className="flex transition-transform duration-1500 ease-in-out"
             style={{
-              transform: `translateX(-${currentIndex * (100 / 4)}%)`,
+              transform: `translateX(-${currentIndex * (100 / 5)}%)`,
             }}
           >
             {loopedServices.map((service, index) => (
               <div
                 key={index}
-                className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 px-4"
+                className="w-full sm:w-1/1 md:w-1/3 lg:w-1/5 flex-shrink-0 px-2"
                 onMouseEnter={pauseSlider}
                 onMouseLeave={resumeSlider}
               >
-                <div className="group bg-gradient-to-r from-white to-gray-100 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 h-full flex flex-col">
-                  <div className="text-5xl text-center text-blue-600 mb-6 transition-transform duration-300 group-hover:rotate-12">
+                <div className="group bg-gradient-to-r from-white to-gray-100 p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 h-full flex flex-col">
+                  <div className="text-4xl text-center text-blue-600 mb-4 transition-transform duration-300 group-hover:rotate-12">
                     {service.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-4 text-center">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2 text-center">
                     {service.title}
                   </h3>
-                  <p className="text-gray-600 text-center mb-6 flex-grow">
+                  <p className="text-gray-600 text-center mb-4 flex-grow">
                     {service.description}
                   </p>
                   <div className="text-center">
                     <a
                       href="#"
-                      className="inline-block px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-md hover:from-blue-600 hover:to-purple-700 transition-colors duration-300"
+                      className="inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-md hover:from-blue-600 hover:to-purple-700 transition-colors duration-300"
                     >
                       {service.cta}
                     </a>
