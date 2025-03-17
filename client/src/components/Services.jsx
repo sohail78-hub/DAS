@@ -87,6 +87,13 @@ const ServicesSection = () => {
     setIsPaused(false);
   };
 
+  // Function to calculate the scale of each card based on its position relative to the center
+  const getCardSize = (index) => {
+    const centerOffset = 2; // The center card is the 3rd card (index 2 when 5 cards are visible)
+    const distance = Math.abs(index - currentIndex - centerOffset);
+    return 1 - Math.min(distance * 0.15, 0.6); // Adjust scaling factor as needed
+  };
+
   return (
     <section className="py-16 bg-gradient-to-r from-blue-500 to-purple-600 relative">
       <div className="container mx-auto px-4">
@@ -101,34 +108,38 @@ const ServicesSection = () => {
               transform: `translateX(-${currentIndex * (100 / 5)}%)`,
             }}
           >
-            {loopedServices.map((service, index) => (
-              <div
-                key={index}
-                className="w-full sm:w-1/1 md:w-1/3 lg:w-1/5 flex-shrink-0 px-2"
-                onMouseEnter={pauseSlider}
-                onMouseLeave={resumeSlider}
-              >
-                <div className="group bg-gradient-to-r from-white to-gray-100 p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 h-full flex flex-col">
-                  <div className="text-4xl text-center text-blue-600 mb-4 transition-transform duration-300 group-hover:rotate-12">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2 text-center">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-600 text-center mb-4 flex-grow">
-                    {service.description}
-                  </p>
-                  <div className="text-center">
-                    <a
-                      href="#"
-                      className="inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-md hover:from-blue-600 hover:to-purple-700 transition-colors duration-300"
-                    >
-                      {service.cta}
-                    </a>
+            {loopedServices.map((service, index) => {
+              const scale = getCardSize(index);
+              return (
+                <div
+                  key={index}
+                  className="w-full sm:w-1/1 md:w-1/3 lg:w-1/5 flex-shrink-0 px-2"
+                  onMouseEnter={pauseSlider}
+                  onMouseLeave={resumeSlider}
+                  style={{ transform: `scale(${scale})`, transition: 'transform 0.5s ease' }}
+                >
+                  <div className="group bg-gradient-to-r from-white to-gray-100 p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+                    <div className="text-4xl text-center text-blue-600 mb-4">
+                      {service.icon}
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2 text-center">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-600 text-center mb-4 flex-grow">
+                      {service.description}
+                    </p>
+                    <div className="text-center">
+                      <a
+                        href="#"
+                        className="inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-md hover:from-blue-600 hover:to-purple-700 transition-colors duration-300"
+                      >
+                        {service.cta}
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
