@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const ServicesSection = () => {
   const services = [
@@ -46,40 +46,127 @@ const ServicesSection = () => {
     },
   ];
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const intervalRef = useRef(null);
+
+  // Auto-play slider
+  const startAutoPlay = () => {
+    intervalRef.current = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === services.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 3000); // Change slide every 3 seconds
+  };
+
+  // Pause slider for 10 seconds
+  const pauseSlider = () => {
+    setIsPaused(true);
+    clearInterval(intervalRef.current);
+    setTimeout(() => {
+      setIsPaused(false);
+      startAutoPlay();
+    }, 10000); // Pause for 10 seconds
+  };
+
+  useEffect(() => {
+    if (!isPaused) {
+      startAutoPlay();
+    }
+    return () => clearInterval(intervalRef.current);
+  }, [isPaused]);
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === services.length - 1 ? 0 : prevIndex + 1
+    );
+    pauseSlider();
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? services.length - 1 : prevIndex - 1
+    );
+    pauseSlider();
+  };
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+    pauseSlider();
+  };
+
   return (
-    <section className="py-16 bg-gradient-to-r from-blue-500 to-purple-600">
+    <section className="py-16 bg-gradient-to-r from-blue-500 to-purple-600 relative">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
           Our Expertise
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service) => (
-            <div
-              key={service.id}
-              className="group bg-gradient-to-r from-white to-gray-100 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-            >
-              <div className="text-5xl text-center text-blue-600 mb-6 transition-transform duration-300 group-hover:rotate-12">
-                {service.icon}
+        <div className="relative overflow-hidden">
+          {/* Slider Container */}
+          <div
+            className="flex transition-transform duration-1500 ease-in-out" // Updated to 1500ms
+            style={{
+              transform: `translateX(-${currentIndex * (100 / 4)}%)`, // Move by 1 card
+            }}
+          >
+            {/* Render the services in a circular manner */}
+            {services.map((service, index) => (
+              <div
+                key={service.id}
+                className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 px-4"
+              >
+                <div className="group bg-gradient-to-r from-white to-gray-100 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 h-full flex flex-col">
+                  <div className="text-5xl text-center text-blue-600 mb-6 transition-transform duration-300 group-hover:rotate-12">
+                    {service.icon}
+                  </div>
+
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4 text-center">
+                    {service.title}
+                  </h3>
+
+                  <p className="text-gray-600 text-center mb-6 flex-grow">
+                    {service.description}
+                  </p>
+
+                  <div className="text-center">
+                    <a
+                      href="#"
+                      className="inline-block px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-md hover:from-blue-600 hover:to-purple-700 transition-colors duration-300"
+                    >
+                      {service.cta}
+                    </a>
+                  </div>
+                </div>
               </div>
+            ))}
+          </div>
+        </div>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-4 text-center">
-                {service.title}
-              </h3>
+        {/* Navigation Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 w3-left w3-hover-text-khaki text-4xl text-white ml-5" // Added 20px margin (ml-5)
+        >
+          &#10094;
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 w3-right w3-hover-text-khaki text-4xl text-white mr-5" // Added 20px margin (mr-5)
+        >
+          &#10095;
+        </button>
 
-              <p className="text-gray-600 text-center mb-6">
-                {service.description}
-              </p>
-
-              <div className="text-center">
-                <a
-                  href="#"
-                  className="inline-block px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-md hover:from-blue-600 hover:to-purple-700 transition-colors duration-300"
-                >
-                  {service.cta}
-                </a>
-              </div>
-            </div>
+        {/* Dot Indicators */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          {services.map((_, index) => (
+            <button
+              key={index}
+              className={`w-3 h-3 rounded-full transition-colors duration-300 ${
+                index === currentIndex ? 'bg-white' : 'bg-gray-400'
+              }`}
+              onClick={() => goToSlide(index)}
+            ></button>
           ))}
         </div>
       </div>
