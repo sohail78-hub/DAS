@@ -60,7 +60,9 @@ const ServicesSection = () => {
     },
   ];
 
+  // Duplicate the entire services array to ensure seamless looping
   const loopedServices = [...services, ...services];
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null); // Track hovered card index
@@ -69,7 +71,13 @@ const ServicesSection = () => {
 
   const startAutoPlay = () => {
     intervalRef.current = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % loopedServices.length);
+      setCurrentIndex((prevIndex) => {
+        if (prevIndex >= loopedServices.length - 1) {
+          // Reset to the start without animation
+          return 0;
+        }
+        return prevIndex + 1;
+      });
     }, 3000);
   };
 
@@ -168,13 +176,13 @@ const ServicesSection = () => {
         </div>
 
         <button
-          onClick={() => setCurrentIndex((prev) => (prev - 1 + loopedServices.length) % loopedServices.length)}
+          onClick={() => setCurrentIndex((prev) => (prev - 1 + services.length) % services.length)}
           className="absolute left-0 top-1/2 transform -translate-y-1/2 text-4xl text-white ml-5"
         >
           &#10094;
         </button>
         <button
-          onClick={() => setCurrentIndex((prev) => (prev + 1) % loopedServices.length)}
+          onClick={() => setCurrentIndex((prev) => (prev + 1) % services.length)}
           className="absolute right-0 top-1/2 transform -translate-y-1/2 text-4xl text-white mr-5"
         >
           &#10095;
