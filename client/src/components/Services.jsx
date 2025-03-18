@@ -12,7 +12,7 @@ const ServicesSection = () => {
     { id: 8, icon: '🤖', title: 'AI & Machine Learning', description: 'Intelligent solutions to automate and optimize processes.', cta: 'Learn More' },
   ];
 
-  const REPEAT_COUNT = 100; // Yahan jitni dafa loop chalana ho, sirf is value ko change karein
+  const REPEAT_COUNT = 100;
   const loopedServices = Array.from({ length: REPEAT_COUNT }, () => services).flat();
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -21,16 +21,22 @@ const ServicesSection = () => {
   const intervalRef = useRef(null);
   const timeoutRef = useRef(null);
 
-  const startAutoPlay = () => {
-    intervalRef.current = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex >= loopedServices.length - 1 ? 0 : prevIndex + 1));
-    }, 3000);
+  useEffect(() => {
+    if (!isPaused) {
+      intervalRef.current = setInterval(() => {
+        moveNext();
+      }, 3000);
+    }
+    return () => clearInterval(intervalRef.current);
+  }, [isPaused, currentIndex]);
+
+  const moveNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % loopedServices.length);
   };
 
-  useEffect(() => {
-    if (!isPaused) startAutoPlay();
-    return () => clearInterval(intervalRef.current);
-  }, [isPaused]);
+  const movePrev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + loopedServices.length) % loopedServices.length);
+  };
 
   const pauseSlider = () => {
     setIsPaused(true);
@@ -67,7 +73,10 @@ const ServicesSection = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">Our Expertise</h2>
 
         <div className="relative overflow-hidden">
-          <div className="flex transition-transform duration-1500 ease-in-out" style={{ transform: `translateX(-${currentIndex * (100 / 5)}%)` }}>
+          <div
+            className="flex transition-transform duration-1500 ease-in-out"
+            style={{ transform: `translateX(-${currentIndex * (100 / 5)}%)` }}
+          >
             {loopedServices.map((service, index) => {
               const scale = getCardSize(index);
               return (
@@ -83,7 +92,10 @@ const ServicesSection = () => {
                     <h3 className="text-lg font-semibold text-gray-800 mb-2 text-center">{service.title}</h3>
                     <p className="text-gray-600 text-center mb-4 flex-grow">{service.description}</p>
                     <div className="text-center">
-                      <a href="#" className="inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-md hover:from-blue-600 hover:to-purple-700 transition-colors duration-300">
+                      <a
+                        href="#"
+                        className="inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-md hover:from-blue-600 hover:to-purple-700 transition-colors duration-300"
+                      >
                         {service.cta}
                       </a>
                     </div>
@@ -94,18 +106,22 @@ const ServicesSection = () => {
           </div>
         </div>
 
-        <button onClick={() => setCurrentIndex((prev) => (prev - 1 + services.length) % services.length)} className="absolute left-0 top-1/2 transform -translate-y-1/2 text-4xl text-white ml-5">
+        {/* Navigation Buttons */}
+        <button onClick={movePrev} className="absolute left-0 top-1/2 transform -translate-y-1/2 text-4xl text-white ml-5">
           &#10094;
         </button>
-        <button onClick={() => setCurrentIndex((prev) => (prev + 1) % services.length)} className="absolute right-0 top-1/2 transform -translate-y-1/2 text-4xl text-white mr-5">
+        <button onClick={moveNext} className="absolute right-0 top-1/2 transform -translate-y-1/2 text-4xl text-white mr-5">
           &#10095;
         </button>
 
+        {/* Dots Indicator */}
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {services.map((_, index) => (
             <button
               key={index}
-              className={`w-3 h-3 rounded-full transition-colors duration-300 ${index === currentIndex % services.length ? 'bg-white' : 'bg-gray-400'}`}
+              className={`w-3 h-3 rounded-full transition-colors duration-300 ${
+                index === currentIndex % services.length ? 'bg-white' : 'bg-gray-400'
+              }`}
               onClick={() => setCurrentIndex(index)}
             ></button>
           ))}
