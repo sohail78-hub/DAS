@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to right, #132c4a , #0e1e37);
+}
+
+/* from-blue-500 to-purple-600 */
