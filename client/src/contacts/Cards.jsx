@@ -1,36 +1,33 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-
-
 const ImageCard = ({ icon, title, content, delay }) => {
   return (
     <motion.div 
-      className="relative w-full md:w-64 lg:w-72 h-48 rounded-lg overflow-hidden shadow-lg m-4 bg-gray-900 border border-cyan-500/20"
+      className="relative w-full md:w-64 lg:w-64 h-32 rounded-lg overflow-hidden shadow-lg m-4 bg-gray-900 border border-cyan-500/20"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 5 }}
       whileHover={{ scale: 1.05 ,y:20}}
     >
       <div className="absolute inset-0 bg-white z-10"></div>
       
-      <div className="absolute top-8 left-0 right-0 flex justify-center z-20">
-        <motion.div 
-          className="text-purple-600 text-5xl"
-          whileHover={{ scale: 1.2, rotate: 5 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          {icon}
-        </motion.div>
-      </div>
+      {/* Icon */}
+      <motion.div 
+        className="absolute top-4 left-0 right-0 flex justify-center text-purple-500 z-20"
+        whileHover={{ scale: 1.2, rotate: 5 }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
+        {icon}
+      </motion.div>
       
       {/* Title */}
       <motion.div 
-        className="absolute bottom-16 left-0 right-0 text-center z-20"
+        className="absolute top-16 left-0 right-0 text-center z-20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: delay + 0.2 }}
       >
-        <h3 className="text-purple-400 text-xl font-bold">{title}</h3>
+        <h3 className="text-purple-400 text-lg font-bold">{title}</h3>
       </motion.div>
       
       {/* Content */}
@@ -80,7 +77,7 @@ const ContactCards = () => {
   ];
 
   return (
-    <div className="h-full bg-gradient-to-r from-blue-500 to-purple-600 text-white  px-4 sm:px-6 lg:px-8">
+    <div className="h-full bg-gradient-to-r  text-white  px-4 sm:px-6 lg:px-8">
       <motion.div 
         className="max-w-7xl mx-auto"
         initial={{ opacity: 0 }}

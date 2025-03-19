@@ -67,10 +67,12 @@ const Navbar = () => {
       icon: '👓',
       label: 'Menu',
       submenu: [
-        { id: 'settings', icon: '⚙️', label: 'Settings' },
-        { id: 'profile', icon: '👤', label: 'Profile' },
-        { id: 'help', icon: '❓', label: 'Help & FAQ' },
-        { id: 'logout', icon: '🚪', label: 'Logout' },
+        { id: 'services', icon: '⚙️', label: 'services' },
+        { id: 'portfolio', icon: '👤', label: 'portfolio' },
+        { id: 'contact', icon: '❓', label: 'contact' },
+        { id: 'About Us', icon: '🚪', label: 'About Us' },
+        { id: 'blog', icon: '🚪', label: 'blog' },
+
       ],
     },
   ];
