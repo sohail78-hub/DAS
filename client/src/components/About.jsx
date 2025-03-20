@@ -94,7 +94,7 @@ const WhoWeAreSection = () => {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="bg-gray-500 p-6 rounded-xl shadow-md"
+              className="bg-gradient-to-r from-blue-500 to-purple-600 p-6 rounded-xl shadow-md"
             >
               <h3 className="text-xl font-semibold mb-3 text-gray-100">A Message from Our Founder</h3>
               <p className="text-gray-100 italic mb-4">"{agencyInfo.founder.message}"</p>
@@ -115,7 +115,7 @@ const WhoWeAreSection = () => {
               key={index}
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
-              className="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl p-6 text-center text-white shadow-lg"
+              className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-6 text-center text-gray-300 shadow-lg"
             >
               <motion.h3 
                 initial={{ scale: 0.8 }}
