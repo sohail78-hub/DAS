@@ -35,7 +35,7 @@ const footerData={
 const Footer = () => {
   return (
     <>
-    <div className=" w-full mx-auto h-full py-10 bg-gradient-to-r  text-white"> 
+    <div className=" w-full mx-auto h-full py-10 bg-gradient-to-r bg-gray-900 text-white"> 
 {/* logo */}
 <h2 className="text-2xl font-bold text-center my-2 ">DIGITAL AGENCY</h2>
 
