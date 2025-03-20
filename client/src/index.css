@@ -2,7 +2,8 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background: linear-gradient(to right bottom, #0b1a2d, #070e1a, #0f203a, #102135);
+  background-color: #03060b;
+  /* background: linear-gradient(to right, #132c4a , #0e1e37); */
 }
 
 /* from-blue-500 to-purple-600 */
