@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const WhoWeAreSection = () => {
-  // Sample data - replace with your actual data
   const agencyInfo = {
     description: "We're a forward-thinking digital agency passionate about crafting innovative solutions that drive real results. Our team of experts combines creativity and technical expertise to deliver exceptional digital experiences.",
     founder: {
