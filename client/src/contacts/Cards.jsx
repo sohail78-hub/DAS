@@ -4,16 +4,17 @@ import { motion } from 'framer-motion';
 const ImageCard = ({ icon, title, content, delay }) => {
   return (
     <motion.div 
-      className="relative w-full md:w-64 lg:w-64 h-32 rounded-lg overflow-hidden shadow-lg m-4 bg-gray-900 border border-cyan-500/20"
+      className="relative w-full md:w-64 lg:w-64 h-32 rounded-lg overflow-hidden shadow-lg m-4 border border-cyan-500/20"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 5 }}
       whileHover={{ scale: 1.05 ,y:20}}
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-[#bf9b30] to-[#a67c00]  z-10"></div>
+      <div className="absolute inset-0 bg-[#e8e4d7] border-4 border-yellow-500
+ text-gray-900 from-[#bf9b30] to-[#a67c00]  z-10"></div>
       
       {/* Icon */}
       <motion.div 
-        className="absolute top-4 left-0 right-0 flex justify-center text-white z-20"
+        className="absolute top-4 left-0 right-0 flex justify-center text-gray-900 z-20"
         whileHover={{ scale: 1.2, rotate: 5 }}
         transition={{ type: "spring", stiffness: 300 }}
       >
@@ -27,7 +28,7 @@ const ImageCard = ({ icon, title, content, delay }) => {
         animate={{ opacity: 1 }}
         transition={{ delay: delay + 0.2 }}
       >
-        <h3 className="text-white text-lg font-bold">{title}</h3>
+        <h3 className="text-gray-900 text-lg font-bold">{title}</h3>
       </motion.div>
       
       {/* Content */}
@@ -37,7 +38,7 @@ const ImageCard = ({ icon, title, content, delay }) => {
         animate={{ opacity: 1 }}
         transition={{ delay: delay + 0.4 }}
       >
-        <p className="text-white text-base">{content}</p>
+        <p className="text-gray-900 text-base">{content}</p>
       </motion.div>
     </motion.div>
   );
@@ -77,7 +78,7 @@ const ContactCards = () => {
   ];
 
   return (
-    <div className="h-full bg-gradient-to-r  text-white  px-4 sm:px-6 lg:px-8">
+    <div className="h-full bg-gradient-to-r  text-gray-900  px-4 sm:px-6 lg:px-8">
       <motion.div 
         className="max-w-7xl mx-auto"
         initial={{ opacity: 0 }}
@@ -90,7 +91,7 @@ const ContactCards = () => {
           animate={{ y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl font-extrabold text-white mb-2">Contact</h1>
+          <h1 className="text-4xl font-extrabold text-gray-200 mb-2">Contact</h1>
         
         </motion.div>
         

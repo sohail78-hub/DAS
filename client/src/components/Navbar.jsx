@@ -171,7 +171,7 @@ const Navbar = () => {
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
         <motion.div
-          className="flex items-center gap-2 bg-gray-800 rounded-full px-4 py-2 text-gray-200 shadow-lg"
+          className="flex items-center gap-2 bg-[#e8e4d7]  rounded-full px-4 py-2 text-gray-800 shadow-lg"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -226,7 +226,7 @@ const Navbar = () => {
         <AnimatePresence>
           {activeMenu && menuItems.find((item) => item.id === activeMenu)?.submenu && (
             <motion.div
-              className="absolute top-[100%] -mt-2 p-4 bg-gray-800 rounded-xl text-gray-200 shadow-lg z-10 overflow-hidden"
+              className="absolute top-[100%] -mt-2 p-4 bg-[#eae5d7] rounded-xl text-gray-900 shadow-lg z-10 overflow-hidden"
               style={{ marginBottom: '20px' }}
               onMouseEnter={() => {
                 clearTimeout(timeoutRef.current);
@@ -254,7 +254,7 @@ const Navbar = () => {
                   .submenu.map((subItem, index) => (
                     <motion.button
                       key={subItem.id}
-                      className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors duration-200 text-left hover:bg-gray-700"
+                      className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors duration-200 text-left hover:bg-gray-300"
                       variants={submenuItemVariants}
                       custom={index}
                       whileHover={{ x: 5 }}

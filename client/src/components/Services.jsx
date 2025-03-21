@@ -142,7 +142,7 @@ const ServicesSection = () => {
                   onMouseLeave={handleMouseLeave}
                   style={{ transform: `scale(${scale})`, transition: 'transform 0.5s ease' }}
                 >
-                  <div className="group bg-gradient-to-r from-[#bf9b30] to-[#a67c00] p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+                  <div className="group bg-[#e8e4d7] text-gray-900 border-4 border-yellow-400 p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col">
                     <div className="text-4xl text-center text-gray-600 mb-4">
                       {service.icon}
                     </div>

@@ -5,7 +5,7 @@ const WhoWeAreSection = () => {
   const agencyInfo = {
     description: "We're a forward-thinking digital agency passionate about crafting innovative solutions that drive real results. Our team of experts combines creativity and technical expertise to deliver exceptional digital experiences.",
     founder: {
-      name: "Jane Smith",
+      name: "Sohail Ahmed",
       role: "Founder & CEO",
       message: "Our mission is to empower businesses through technology and design. We believe in creating digital experiences that not only look beautiful but also deliver measurable value.",
       image: "https://www.cio.com/wp-content/uploads/2024/01/shutterstock_1095953582.jpg?quality=50&strip=all&w=1024"
@@ -49,11 +49,12 @@ const WhoWeAreSection = () => {
           variants={containerVariants}
           className="text-center mb-12"
         >
+
           <motion.h2 
             variants={itemVariants} 
             className="text-4xl md:text-5xl font-bold mb-4 text-gray-100"
           >
-            Who We Are
+            About Us
           </motion.h2>
           <motion.p 
             variants={itemVariants} 
@@ -94,10 +95,10 @@ const WhoWeAreSection = () => {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="bg-gradient-to-r from-[#a67c00] to-[#bf9b30] p-6 rounded-xl shadow-md"
+              className="bg-[#e8e4d7] border-4 border-yellow-500 border-4 border-yellow-500 from-[#a67c00] to-[#bf9b30] p-6 rounded-xl text-gray-900 shadow-md"
             >
-              <h3 className="text-xl font-semibold mb-3 text-gray-100">A Message from Our Founder</h3>
-              <p className="text-gray-100 italic mb-4">"{agencyInfo.founder.message}"</p>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">A Message from Our Founder</h3>
+              <p className="text-gray-900 italic mb-4">"{agencyInfo.founder.message}"</p>
               <div className="w-16 h-1 bg-blue-500 rounded"></div>
             </motion.div>
           </motion.div>
@@ -115,7 +116,7 @@ const WhoWeAreSection = () => {
               key={index}
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
-              className="bg-gradient-to-r  from-[#bf9b30] to-[#a67c00] rounded-xl p-6 text-center text-gray-300 shadow-lg"
+              className="bg-[#e8e4d7] border-4 border-yellow-500   from-[#bf9b30] to-[#a67c00] rounded-xl p-6 text-center text-gray-900 shadow-lg"
             >
               <motion.h3 
                 initial={{ scale: 0.8 }}
