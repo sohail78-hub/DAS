@@ -9,11 +9,11 @@ const ImageCard = ({ icon, title, content, delay }) => {
       animate={{ opacity: 1, y: 5 }}
       whileHover={{ scale: 1.05 ,y:20}}
     >
-      <div className="absolute inset-0 bg-white z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-[#bf9b30] to-[#a67c00]  z-10"></div>
       
       {/* Icon */}
       <motion.div 
-        className="absolute top-4 left-0 right-0 flex justify-center text-purple-500 z-20"
+        className="absolute top-4 left-0 right-0 flex justify-center text-white z-20"
         whileHover={{ scale: 1.2, rotate: 5 }}
         transition={{ type: "spring", stiffness: 300 }}
       >
@@ -27,7 +27,7 @@ const ImageCard = ({ icon, title, content, delay }) => {
         animate={{ opacity: 1 }}
         transition={{ delay: delay + 0.2 }}
       >
-        <h3 className="text-purple-400 text-lg font-bold">{title}</h3>
+        <h3 className="text-white text-lg font-bold">{title}</h3>
       </motion.div>
       
       {/* Content */}
@@ -37,7 +37,7 @@ const ImageCard = ({ icon, title, content, delay }) => {
         animate={{ opacity: 1 }}
         transition={{ delay: delay + 0.4 }}
       >
-        <p className="text-purple-700 text-base">{content}</p>
+        <p className="text-white text-base">{content}</p>
       </motion.div>
     </motion.div>
   );
@@ -94,7 +94,7 @@ const ContactCards = () => {
         
         </motion.div>
         
-        <div className="flex flex-wrap justify-center">
+        <div className="flex  flex-wrap justify-center">
           {cards.map((card, index) => (
             <ImageCard 
               key={index}

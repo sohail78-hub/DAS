@@ -18,7 +18,7 @@ const HeroSection = () => {
             <button className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-blue-600 transition duration-300">
               Learn More
             </button>
-            <button className="bg-yellow-400 text-gray-900 font-semibold py-3 px-8 rounded-lg hover:bg-yellow-500 transition duration-300 ml-auto">
+            <button className="bg-gradient-to-r from-[#bf9b30] to-[#a67c00] text-gray-900 font-semibold py-3 px-8 rounded-lg hover:bg-yellow-500 transition duration-300 ml-auto">
               Get a Quote
             </button>
           </div>
