@@ -72,7 +72,7 @@ const Contact = () => {
             <textarea className="w-full p-2 border border-gray-300 rounded"></textarea>
           </div>
           
-          <button  type="submit" className="bg-white w-full cursor-pointer text-blue-700 font-bold p-2 rounded hover:bg-white">
+          <button  type="submit" className="bg-gradient-to-r from-[#bf9b30] to-[#a67c00] w-full cursor-pointer text-white font-bold p-2 rounded hover:bg-white hover:text-black ">
             Submit
           </button>
         </form>
