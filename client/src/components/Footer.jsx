@@ -23,7 +23,7 @@ const footerData={
   },
   sportStore: {
     title: "DIGITAL AGENCY",
-    links: ["Lorem Ipsum", "Lorem", "Lorem", "Our Lorem", "Lorem"],
+    links: ["Lorem Ipsum", "Lorem", "Lorem", "Our Lorem", "MyLorem"],
   },
   quickLinks: {
     title: "QUICK LINKS",
