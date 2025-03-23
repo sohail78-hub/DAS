@@ -29,7 +29,6 @@ const footerData={
     title: "QUICK LINKS",
     links: ["Facebook", "Instagram", "YouTube", "Pinterest", "Twitter"],
   },
-
 }
 
 const Footer = () => {
@@ -38,7 +37,6 @@ const Footer = () => {
     <div className=" w-full mx-auto h-full py-10 bg-gradient-to-r  text-white"> 
 {/* logo */}
 <h2 className="text-2xl font-bold text-center my-2 ">DIGITAL AGENCY</h2>
-
 
 <div className='flex justify-center gap-3 items-center py-8 cursor-pointer'>
   <motion.div

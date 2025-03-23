@@ -34,45 +34,55 @@ const Navbar = () => {
   }, [scrolled]);
 
   const menuColors = {
-    shop: '#4F46E5',
-    resource: '#10B981',
-    menu: '#F59E0B',
+    services: '#4F46E5',
+    about: '#10B981',
+    contact: '#F59E0B',
+    portfolio: '#EC4899',
   };
 
   const menuItems = [
     {
-      id: 'shop',
-      icon: '💻',
-      label: 'Shop',
+      id: 'services',
+      icon: '⚙️',
+      label: 'Services',
       submenu: [
-        { id: 'products', icon: '📦', label: 'Products' },
-        { id: 'new-arrivals', icon: '🆕', label: 'New Arrivals' },
-        { id: 'bestsellers', icon: '🏆', label: 'Bestsellers' },
-        { id: 'discounts', icon: '💰', label: 'Discounts' },
+        { id: 'consulting', icon: '📋', label: 'Consulting' },
+        { id: 'development', icon: '💻', label: 'Development' },
+        { id: 'design', icon: '🎨', label: 'Design' },
+        { id: 'support', icon: '🛠️', label: 'Support' },
       ],
     },
     {
-      id: 'resource',
-      icon: '🗃️',
-      label: 'Resource',
+      id: 'about',
+      icon: '👤',
+      label: 'About',
       submenu: [
-        { id: 'framer-motion', icon: '✨', label: 'Framer motion' },
-        { id: 'navigation', icon: '🧭', label: 'Navigation' },
-        { id: 'components', icon: '🧩', label: 'Components' },
-        { id: 'all-resource', icon: '📁', label: 'All resource' },
+        { id: 'team', icon: '👥', label: 'Our Team' },
+        { id: 'mission', icon: '🎯', label: 'Mission' },
+        { id: 'history', icon: '📜', label: 'History' },
+        { id: 'values', icon: '🌟', label: 'Values' },
       ],
     },
     {
-      id: 'menu',
-      icon: '👓',
-      label: 'Menu',
+      id: 'contact',
+      icon: '❓',
+      label: 'Contact',
       submenu: [
-        { id: 'services', icon: '⚙️', label: 'services' },
-        { id: 'portfolio', icon: '👤', label: 'portfolio' },
-        { id: 'contact', icon: '❓', label: 'contact' },
-        { id: 'About Us', icon: '🚪', label: 'About Us' },
-        { id: 'blog', icon: '🚪', label: 'blog' },
-
+        { id: 'email', icon: '✉️', label: 'Email' },
+        { id: 'phone', icon: '📞', label: 'Phone' },
+        { id: 'location', icon: '📍', label: 'Location' },
+        { id: 'support', icon: '💬', label: 'Support' },
+      ],
+    },
+    {
+      id: 'portfolio',
+      icon: '📁',
+      label: 'Portfolio',
+      submenu: [
+        { id: 'projects', icon: '🏗️', label: 'Projects' },
+        { id: 'case-studies', icon: '📊', label: 'Case Studies' },
+        { id: 'clients', icon: '🤝', label: 'Clients' },
+        { id: 'gallery', icon: '🖼️', label: 'Gallery' },
       ],
     },
   ];
@@ -107,7 +117,7 @@ const Navbar = () => {
         duration: 0.2,
       },
     },
-    visible: {
+    visible: {  
       opacity: 1,
       y: 0,
       clipPath: 'inset(0% 0% 0% 0%)',
@@ -119,7 +129,6 @@ const Navbar = () => {
       },
     },
   };
-
   const submenuItemVariants = {
     hidden: { opacity: 0, x: -20 },
     visible: {
@@ -162,16 +171,16 @@ const Navbar = () => {
     <>
       <motion.div
         className="fixed top-0 w-full flex justify-center z-50 pt-4 pb-4"
-        initial={{ left: '50%', x: '-50%', width: '550px' }} // Center the Navbar initially
+        initial={{ left: '50%', x: '-50%', width: '550px' }}
         animate={{
-          left: scrolled ? '20px' : '50%', // Move to left on scroll
-          x: scrolled ? '0' : '-50%', // Adjust transform for centering
-          width: hovered ? '550px' : scrolled ? 'auto' : '550px', // Adjust width
+          left: scrolled ? '20px' : '50%',
+          x: scrolled ? '0' : '-50%',
+          width: hovered ? '550px' : scrolled ? 'auto' : '550px',
         }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
         <motion.div
-          className="flex items-center gap-2 bg-[#e8e4d7]  rounded-full px-4 py-2 text-gray-800 shadow-lg"
+          className="flex items-center gap-2 bg-[#e8e4d7] rounded-full px-4 py-2 text-gray-800 shadow-lg"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
