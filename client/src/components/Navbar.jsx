@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(null);
   const [scrolled, setScrolled] = useState(false);
   const [hovered, setHovered] = useState(false);
   const timeoutRef = useRef(null);
-  const navigate = useNavigate();
 
   const handleMouseEnter = () => {
     clearTimeout(timeoutRef.current);
@@ -30,7 +28,9 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [scrolled]);
 
   const menuColors = {
@@ -43,17 +43,18 @@ const Navbar = () => {
   const menuItems = [
     {
       id: 'services',
+      // icon: '⚙️',
       label: 'Services',
-      link: '/services',
       submenu: [
-        { id: 'digital-marketing', label: 'Digital Marketing', link: '/services#digital-marketing' },
-        { id: 'web-development', label: 'Web Development', link: '/services#web-development' },
-        { id: 'app-development', label: 'App Development', link: '/services#app-development' },
-        { id: 'graphic-design', label: 'Graphic Design', link: '/services#graphic-design' }
+        { id: 'consulting', icon: '📋', label: 'Consulting' },
+        { id: 'development', icon: '💻', label: 'Development' },
+        { id: 'design', icon: '🎨', label: 'Design' },
+        { id: 'support', icon: '🛠️', label: 'Support' },
       ],
     },
     {
       id: 'about',
+      // icon: '👤',
       label: 'About',
       submenu: [
         { id: 'team', icon: '👥', label: 'Our Team' },
@@ -64,6 +65,7 @@ const Navbar = () => {
     },
     {
       id: 'contact',
+      // icon: '❓',
       label: 'Contact',
       submenu: [
         { id: 'email', icon: '✉️', label: 'Email' },
@@ -74,6 +76,7 @@ const Navbar = () => {
     },
     {
       id: 'portfolio',
+      // icon: '📁',
       label: 'Portfolio',
       submenu: [
         { id: 'projects', icon: '🏗️', label: 'Projects' },
@@ -86,8 +89,17 @@ const Navbar = () => {
 
   const navbarVariants = {
     initial: { opacity: 0, y: -20 },
-    animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' }},
-    scrolled: { boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.1)' },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: 'easeOut',
+      },
+    },
+    scrolled: {
+      boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.1)',
+    },
   };
 
   const menuButtonVariants = {
@@ -97,31 +109,62 @@ const Navbar = () => {
   };
 
   const submenuVariants = {
-    hidden: { opacity: 0, y: -10, clipPath: 'inset(0% 0% 100% 0%)' },
+    hidden: {
+      opacity: 0,
+      y: -10,
+      clipPath: 'inset(0% 0% 100% 0%)',
+      transition: {
+        duration: 0.2,
+      },
+    },
     visible: {  
       opacity: 1,
       y: 0,
       clipPath: 'inset(0% 0% 0% 0%)',
-      transition: { duration: 0.3, ease: 'easeOut', staggerChildren: 0.05, delayChildren: 0.1 }
+      transition: {
+        duration: 0.3,
+        ease: 'easeOut',
+        staggerChildren: 0.05,
+        delayChildren: 0.1,
+      },
     },
   };
-
   const submenuItemVariants = {
     hidden: { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.3,
+      },
+    },
   };
 
   const logoVariants = {
     initial: { opacity: 0, x: -20 },
-    animate: { opacity: 1, x: 0, transition: { duration: 0.5, ease: 'easeOut' }},
-    hover: { scale: 1.1, rotate: [0, -5, 5, 0], transition: { duration: 0.5 }},
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.5,
+        ease: 'easeOut',
+      },
+    },
+    hover: {
+      scale: 1.1,
+      rotate: [0, -5, 5, 0],
+      transition: {
+        duration: 0.5,
+      },
+    },
   };
 
-  const getVisibleMenuItems = () => scrolled && !hovered ? [] : menuItems;
-
-  const handleServicesClick = (e) => {
-    navigate('/services');
-    setActiveMenu(null);
+  const getVisibleMenuItems = () => {
+    if (scrolled && !hovered) {
+      return [];
+    } else {
+      return menuItems;
+    }
   };
 
   return (
@@ -153,99 +196,88 @@ const Navbar = () => {
 
           <div className="flex-1 flex items-center">
             {getVisibleMenuItems().map((item) => (
-              <motion.div
+              <motion.button
                 key={item.id}
-                className={`relative flex items-center gap-2 px-3 py-1 rounded-md transition-colors duration-200 ${
+                className={`flex items-center gap-2 px-3 py-1 rounded-md transition-colors duration-200 ${
                   activeMenu === item.id ? 'bg-gray-700' : ''
                 }`}
                 onMouseEnter={() => setActiveMenu(item.id)}
-                onMouseLeave={() => !item.submenu && setActiveMenu(null)}
+                onMouseLeave={() => {
+                  if (!item.submenu) {
+                    setActiveMenu(null);
+                  }
+                }}
                 variants={menuButtonVariants}
                 initial="initial"
-                whileHover={{ scale: 1.05, backgroundColor: menuColors[item.id] + '44' }}
+                whileHover={{
+                  scale: 1.05,
+                  backgroundColor: menuColors[item.id] + '44',
+                  transition: { duration: 0.2 },
+                }}
                 whileTap="tap"
+                layout
                 style={{
                   backgroundColor: activeMenu === item.id ? menuColors[item.id] + '66' : '',
                 }}
               >
-                {item.id === 'services' ? (
-                  <>
-                    <Link
-                      to={item.link}
-                      onClick={handleServicesClick}
-                      className="flex items-center gap-2 text-current hover:no-underline"
-                    >
-                      <span>{item.label}</span>
-                    </Link>
-                    <AnimatePresence>
-                      {activeMenu === 'services' && (
-                        <motion.div
-                          className="absolute top-[100%] left-0 -mt-2 p-4 bg-[#eae5d7] rounded-xl shadow-lg z-10"
-                          style={{ width: '400px', borderTop: `3px solid ${menuColors[item.id]}` }}
-                          variants={submenuVariants}
-                          initial="hidden"
-                          animate="visible"
-                          exit="hidden"
-                        >
-                          <div className="flex flex-col gap-3">
-                            {item.submenu.map((subItem) => (
-                              <Link
-                                key={subItem.id}
-                                to={subItem.link}
-                                className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-300 transition-colors"
-                                onClick={() => {
-                                  setActiveMenu(null);
-                                  setHovered(false);
-                                }}
-                              >
-                                <span className="w-6 h-6 flex items-center justify-center bg-gray-700 rounded-md">
-                                  {/* Add icon if needed */}
-                                </span>
-                                <span>{subItem.label}</span>
-                              </Link>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </>
-                ) : (
-                  <>
-                    <span>{item.label}</span>
-                    <AnimatePresence>
-                      {activeMenu === item.id && item.submenu && (
-                        <motion.div
-                          className="absolute top-[100%] left-0 -mt-2 p-4 bg-[#eae5d7] rounded-xl shadow-lg z-10"
-                          style={{ width: '400px', borderTop: `3px solid ${menuColors[item.id]}` }}
-                          variants={submenuVariants}
-                          initial="hidden"
-                          animate="visible"
-                          exit="hidden"
-                        >
-                          <div className="flex flex-col gap-3">
-                            {item.submenu.map((subItem) => (
-                              <motion.div
-                                key={subItem.id}
-                                className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-300"
-                                variants={submenuItemVariants}
-                                whileHover={{ x: 5 }}
-                              >
-                                <span className="w-6 h-6 flex items-center justify-center bg-gray-700 rounded-md">
-                                  {subItem.icon}
-                                </span>
-                                <span>{subItem.label}</span>
-                              </motion.div>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </>
-                )}
-              </motion.div>
+                <motion.span
+                  animate={{ rotate: activeMenu === item.id ? [0, -10, 10, -10, 0] : 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {item.icon}
+                </motion.span>
+                <span>{item.label}</span>
+              </motion.button>
             ))}
           </div>
         </motion.div>
+
+        <AnimatePresence>
+          {activeMenu && menuItems.find((item) => item.id === activeMenu)?.submenu && (
+            <motion.div
+              className="absolute top-[100%] -mt-2 p-4 bg-[#eae5d7] rounded-xl text-gray-900 shadow-lg z-10 overflow-hidden"
+              style={{ marginBottom: '20px' }}
+              onMouseEnter={() => {
+                clearTimeout(timeoutRef.current);
+                setHovered(true);
+              }}
+              onMouseLeave={() => {
+                timeoutRef.current = setTimeout(() => {
+                  setHovered(false);
+                  setActiveMenu(null);
+                }, 200);
+              }}
+              variants={submenuVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              key={activeMenu}
+              style={{
+                width: '400px',
+                borderTop: `3px solid ${menuColors[activeMenu]}`,
+              }}
+            >
+              <div className="flex flex-col gap-3">
+                {menuItems
+                  .find((item) => item.id === activeMenu)
+                  .submenu.map((subItem, index) => (
+                    <motion.button
+                      key={subItem.id}
+                      className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors duration-200 text-left hover:bg-gray-300"
+                      variants={submenuItemVariants}
+                      custom={index}
+                      whileHover={{ x: 5 }}
+                    >
+                      <span className="w-6 h-6 flex items-center justify-center bg-gray-700 rounded-md">
+                        {subItem.icon}
+                      </span>
+                      <span>{subItem.label}</span>
+                    </motion.button>
+                  ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
     </>
   );
