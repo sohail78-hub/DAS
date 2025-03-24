@@ -10,7 +10,7 @@ import { FaWhatsapp } from "react-icons/fa";
 const Contact = () => {
   return (
     <>
-    <div className=" p-6 bg-gradient-to-r  text-white">
+    <div className=" p-6 text-white">
       <Cards/>
 
     <div className="flex flex-col md:flex-row   ">
