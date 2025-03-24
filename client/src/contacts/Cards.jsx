@@ -78,7 +78,7 @@ const ContactCards = () => {
   ];
 
   return (
-    <div className="h-full bg-gradient-to-r  text-gray-900  px-4 sm:px-6 lg:px-8">
+    <div className="h-full text-gray-900  px-4 sm:px-6 lg:px-8">
       <motion.div 
         className="max-w-7xl mx-auto"
         initial={{ opacity: 0 }}

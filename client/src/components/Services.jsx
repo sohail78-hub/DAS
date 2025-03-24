@@ -70,12 +70,16 @@ const ServicesSection = () => {
   return (
     <section className="py-16 bg-gradient-to-r  relative">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">Our Expertise</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
+          Our Expertise
+        </h2>
 
         <div className="relative overflow-hidden">
           <div
             className="flex transition-transform duration-1500 ease-in-out"
-            style={{ transform: `translateX(-${currentIndex * (100 / 5)}%)` }}
+            style={{
+              transform: `translateX(-${currentIndex * (100 / 5)}%)`,
+            }}
           >
             {loopedServices.map((service, index) => {
               const scale = getCardSize(index);
@@ -87,7 +91,7 @@ const ServicesSection = () => {
                   onMouseLeave={handleMouseLeave}
                   style={{ transform: `scale(${scale})`, transition: 'transform 0.5s ease' }}
                 >
-                  <div className="group bg-gradient-to-r from-[#bf9b30] to-[#a67c00] p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+                  <div className="group bg-[#e8e4d7] text-gray-900 border-4 border-yellow-400 p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col">
                     <div className="text-4xl text-center text-gray-600 mb-4">
                       {service.icon}
                     </div>
