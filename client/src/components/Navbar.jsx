@@ -43,7 +43,7 @@ const Navbar = () => {
   const menuItems = [
     {
       id: 'services',
-      icon: '⚙️',
+      // icon: '⚙️',
       label: 'Services',
       submenu: [
         { id: 'consulting', icon: '📋', label: 'Consulting' },
@@ -54,7 +54,7 @@ const Navbar = () => {
     },
     {
       id: 'about',
-      icon: '👤',
+      // icon: '👤',
       label: 'About',
       submenu: [
         { id: 'team', icon: '👥', label: 'Our Team' },
@@ -65,7 +65,7 @@ const Navbar = () => {
     },
     {
       id: 'contact',
-      icon: '❓',
+      // icon: '❓',
       label: 'Contact',
       submenu: [
         { id: 'email', icon: '✉️', label: 'Email' },
@@ -76,7 +76,7 @@ const Navbar = () => {
     },
     {
       id: 'portfolio',
-      icon: '📁',
+      // icon: '📁',
       label: 'Portfolio',
       submenu: [
         { id: 'projects', icon: '🏗️', label: 'Projects' },
