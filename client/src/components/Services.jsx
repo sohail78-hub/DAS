@@ -127,7 +127,7 @@ const ServicesSection = () => {
   };
 
   return (
-    <section className="py-16 bg-gradient-to-r from-blue-500 to-purple-600 relative">
+    <section className="py-16 bg-gradient-to-r  relative">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
           Our Expertise
@@ -150,8 +150,8 @@ const ServicesSection = () => {
                   onMouseLeave={handleMouseLeave}
                   style={{ transform: `scale(${scale})`, transition: 'transform 0.5s ease' }}
                 >
-                  <div className="group bg-gradient-to-r from-white to-gray-100 p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col">
-                    <div className="text-4xl text-center text-blue-600 mb-4">
+                  <div className="group bg-[#e8e4d7] text-gray-900 border-4 border-yellow-400 p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+                    <div className="text-4xl text-center text-gray-600 mb-4">
                       {service.icon}
                     </div>
                     <h3 className="text-lg font-semibold text-gray-800 mb-2 text-center">
@@ -163,7 +163,7 @@ const ServicesSection = () => {
                     <div className="text-center">
                       <a
                         href="#"
-                        className="inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-md hover:from-blue-600 hover:to-purple-700 transition-colors duration-300"
+                        className="inline-block px-4 py-2 bg-gradient-to-r from-gray-500 to-gray-800 text-white rounded-md hover:from-gray-600 hover:to-gray-800 transition-colors duration-300"
                       >
                         {service.cta}
                       </a>
