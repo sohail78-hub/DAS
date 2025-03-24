@@ -23,24 +23,22 @@ const footerData={
   },
   sportStore: {
     title: "DIGITAL AGENCY",
-    links: ["Lorem Ipsum", "Lorem", "Lorem", "Our Lorem", "Lorem"],
+    links: ["Lorem Ipsum", "Lorem", "Lorem", "Our Lorem", "MyLorem"],
   },
   quickLinks: {
     title: "QUICK LINKS",
     links: ["Facebook", "Instagram", "YouTube", "Pinterest", "Twitter"],
   },
-
 }
 
 const Footer = () => {
   return (
     <>
-    <div className=" w-full mx-auto h-full py-10 bg-gradient-to-r bg-gray-900 text-white"> 
+    <div className=" w-full mx-auto h-full py-10 bg-[#0c0c0c] text-white"> 
 {/* logo */}
 <h2 className="text-2xl font-bold text-center my-2 ">DIGITAL AGENCY</h2>
 
-
-<div className='flex justify-center gap-3 items-center py-8 cursor-pointer'>
+<div className='flex justify-center gap-3 items-center py-3 cursor-pointer'>
   <motion.div
     whileHover={{ scale: 0.9, y: 20 }}
     initial={{ x: 0, rotate: 0 }}

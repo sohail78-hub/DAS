@@ -102,7 +102,7 @@ const Portfolio = () => {
 
   return (
     <motion.section
-      className="py-12 bg-gradient-to-r "
+      className="py-12"
       initial="hidden"
       whileInView="visible"
       variants={containerVariants}
