@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Design_Development = () => {
   const containerVariants = {
@@ -43,6 +44,11 @@ const Design_Development = () => {
           <p className="text-white font-semibold text-lg">
             Let’s craft your next big thing—start today!
           </p>
+          <div className=" space-x-4" >
+          <Link to='/Get_A_Quote' className="bg-gradient-to-r from-[#bf9b30] to-[#a67c00] text-gray-900 font-semibold py-3 px-8 rounded-lg hover:bg-yellow-500 transition duration-300 ml-auto">
+              Get a Quote
+            </Link>
+          </div>
         </motion.div>
 
         <motion.div className="space-y-6" variants={itemVariants}>
@@ -85,6 +91,7 @@ const Design_Development = () => {
               </p>
             </div>
           </div>
+         
         </motion.div>
       </motion.div>
     </section>
