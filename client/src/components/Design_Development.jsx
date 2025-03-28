@@ -1,6 +1,52 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { btnClas } from '../../constants/Colors';
+import LogoSliders from './LogoSliders';
+
+const sliderData=[
+  {
+    id: 1,
+    src: 'https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/06/attachment_59337693.jpg?auto=format&q=60&fit=max&w=930',
+    title: 'Graphic Design'
+  },
+  {
+    id: 2,
+    src: 'https://www.one-resource.com/wp-content/uploads/Social-media-management-%E2%80%93-small-business-know-how.png',
+    title: 'Logo Design'
+  },
+  {
+    id: 3,
+    src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqfl84nMCPWCgt7iQ8CltVHqX2uH6wFutM_w&s',
+    title: '3d Product content'
+  },
+  {
+    id: 4,
+    src: 'https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/10/attachment_78794486.jpeg?auto=format&q=60&fit=max&w=930',
+    title: 'Digital Ads Design'
+  }
+  ,
+  {
+    id: 5,
+    src: 'https://cdn.dribbble.com/userupload/4395530/file/original-b8f52895e979c6d95234206c6cfa860d.jpg?resize=400x0',
+    title: 'Reel Content'
+  }
+  ,
+  {
+    id: 6,
+    src: 'https://cdn.svgator.com/images/2024/02/website-animation-examples-and-effects.png',
+    title: 'Animation content'
+  }
+  ,
+  {
+    id: 7,
+    src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoNS5w0F-BZq-W3gvVbhi-IU5or5MfzfShDA&s',
+    title: 'Video Editing'
+  }
+  
+
+]
+
 
 const Design_Development = () => {
   const containerVariants = {
@@ -21,6 +67,7 @@ const Design_Development = () => {
   };
 
   return (
+    <>
     <section className="py-28 px-4 sm:px-6 lg:px-8">
       <motion.div
         className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8"
@@ -45,7 +92,7 @@ const Design_Development = () => {
             Let’s craft your next big thing—start today!
           </p>
           <div className=" space-x-4" >
-          <Link to='/Get_A_Quote' className="bg-gradient-to-r from-[#bf9b30] to-[#a67c00] text-gray-900 font-semibold py-3 px-8 rounded-lg hover:bg-yellow-500 transition duration-300 ml-auto">
+          <Link to='/Get_A_Quote' className={`${btnClas}`}>
               Get a Quote
             </Link>
           </div>
@@ -95,6 +142,9 @@ const Design_Development = () => {
         </motion.div>
       </motion.div>
     </section>
+    <LogoSliders sliderData={sliderData} />
+    </>
+
   );
 };
 
