@@ -1,6 +1,56 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { btnClas } from '../../constants/Colors';
+import LogoSliders from './LogoSliders';
+
+const sliderData=[
+  {
+    id: 1,
+    src: 'https://www.seobrand.com/wp-content/uploads/2024/03/What-are-SEO-Services.jpg',
+    title: 'SEO Services'
+  },
+  {
+    id: 2,
+    src: 'https://www.one-resource.com/wp-content/uploads/Social-media-management-%E2%80%93-small-business-know-how.png',
+    title: 'Social Media Management'
+  },
+  {
+    id: 3,
+    src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7v_tplgnFEKcWyqwkwL0Qd8G2a1DNE9e5qQ&s',
+    title: 'Meta Ads'
+  },
+  {
+    id: 4,
+    src: 'https://www.searchenginejournal.com/wp-content/uploads/2021/11/google-ads-insights-page-61967650b562e-sej.png',
+    title: 'Google Ads'
+  }
+  ,
+  {
+    id: 5,
+    src: 'https://media.licdn.com/dms/image/v2/D5612AQHnqP4GvpQnKQ/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1723018550857?e=2147483647&v=beta&t=VFtkQOy-jaherYlOpLsNX0dOnaidxcIb8mShr1dZKrw',
+    title: 'Business Promotion'
+  }
+  ,
+  {
+    id: 6,
+    src: 'https://media.licdn.com/dms/image/v2/C5612AQG2V0uc_r0ciA/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1617417923890?e=2147483647&v=beta&t=glHQ2YgBavB2cytxS66fqXQOUXXBoqfazvA_07QChcQ',
+    title: 'Brand Building'
+  }
+    ,
+    {
+        id: 7,
+        src: 'https://www.glueup.com/sites/default/files/image_1571.png',
+        title: 'Digital Business Consultation'
+    }
+    ,
+    {
+        id: 8,
+        src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuqnsk1Z5Z6qvlFXzwVc0UCaPfm-YiFIFWEA&s',
+        title: 'Content Creation'
+    }
+
+]
 
 const Digital_Marketing_Outsourcing = () => {
   const containerVariants = {
@@ -21,6 +71,7 @@ const Digital_Marketing_Outsourcing = () => {
   };
 
   return (
+    <>
     <section className="py-28 px-4 sm:px-6 lg:px-8">
       <motion.div
         className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8"
@@ -44,12 +95,11 @@ const Digital_Marketing_Outsourcing = () => {
           <p className="text-white font-semibold text-lg">
             Let’s take your marketing to the next level—partner with us today!
           </p>
-          <div className=" space-x-4" >
-          <Link to='/Get_A_Quote' className="bg-gradient-to-r from-[#bf9b30] to-[#a67c00] text-gray-900 font-semibold py-3 px-8 rounded-lg hover:bg-yellow-500 transition duration-300 ml-auto">
+   <div className=" space-x-4" >
+          <Link to='/Get_A_Quote' className={`${btnClas}`}>
               Get a Quote
             </Link>
-          </div>
-        </motion.div>
+          </div>        </motion.div>
 
         <motion.div className="space-y-6" variants={itemVariants}>
           <div className="flex items-start space-x-4">
@@ -96,6 +146,8 @@ const Digital_Marketing_Outsourcing = () => {
         </motion.div>
       </motion.div>
     </section>
+    <LogoSliders sliderData={sliderData} />
+    </>
   );
 };
 

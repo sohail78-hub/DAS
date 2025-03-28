@@ -205,6 +205,7 @@ const Navbar = () => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
+          <Link to='/' >
           <motion.div
             className="mr-4 flex items-center"
             variants={logoVariants}
@@ -214,6 +215,7 @@ const Navbar = () => {
           >
             <img src="/da-log.png" alt="Logo" className="h-16 w-auto" />
           </motion.div>
+          </Link>
 
           <div className="flex-1 flex items-center">
             {getVisibleMenuItems().map((item) => (

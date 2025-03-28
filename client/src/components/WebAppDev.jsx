@@ -1,6 +1,68 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { btnClas } from '../../constants/Colors';
+import LogoSliders from './LogoSliders';
+
+const sliderData=[
+  {
+    id: 1,
+    src: 'https://www.apptunix.com/blog/wp-content/uploads/sites/3/2019/10/mobile-apps-in-business-copy-5.jpg',
+    title: 'Mobile Apps'
+  },
+  {
+    id: 2,
+    src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSITiUDIxOHORHKvxMsniK1j8Bwfpmd0sLROg&s',
+    title: 'Ecommerce'
+  },
+  {
+    id: 3,
+    src: 'https://blog.dreamfactory.com/hubfs/Imported_Blog_Media/What-is-an-API-Integration.png',
+    title: 'Payment Integration'
+  },
+  {
+    id: 4,
+    src: 'https://cdn-ikpplpn.nitrocdn.com/rKfvbqixbjRUiVJszbkgQBRIwKbXWEuF/assets/images/optimized/rev-d592128/www.schgroup.com/wp-content/uploads/2024/04/ERP-Webpage-Graphic-1.png',
+    title: 'Erp Solution'
+  }
+  ,
+  {
+    id: 5,
+    src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBtrFZhWsmo1Dm46amYTr2eLwp_SsxxLVVxw&s',
+    title: 'Customized Bysiness Solutions'
+  }
+  ,
+  {
+    id: 6,
+    src: 'https://blog.dreamfactory.com/hubfs/Imported_Blog_Media/What-is-an-API-Integration.png',
+    title: 'Api Integration'
+  }
+    ,
+    {
+        id: 7,
+        src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWgSWqFdONwoBO8jSssXk68mt5xXo0gbiUwA&s',
+        title: 'POS'
+    }
+    ,
+    {
+        id: 8,
+        src: 'https://images-platform.99static.com//Ion7fKG2TbkDPFtKGAkZzhduHbQ=/0x0:1288x1288/fit-in/500x500/99designs-contests-attachments/75/75098/attachment_75098795',
+        title: 'Logistic '
+    }
+    ,
+    {
+        id: 9,
+        src: 'https://vestazone.com/assets/images/blogs/Why-Shop-at-Vesta-Zone/userfriendlywebsite.webp',
+        title: 'E Store'
+    }
+    ,
+    {
+        id: 10,
+        src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYZCNzLGmsLK_BEn8tWUT21UQhgEKf8W0IUg&s',
+        title: 'Logo 10'
+    }
+]
+
 
 const WebAppDev = () => {
   const containerVariants = {
@@ -21,6 +83,7 @@ const WebAppDev = () => {
   };
 
   return (
+    <>
     <section className="text-white py-28 px-4 sm:px-6 lg:px-8">
       <motion.div
         className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8"
@@ -44,8 +107,8 @@ const WebAppDev = () => {
           <p className="text-white font-semibold text-lg">
             Let’s build your digital success story today!
           </p>
-          <div className=" space-x-4" >
-          <Link to='/Get_A_Quote' className="bg-gradient-to-r from-[#bf9b30] to-[#a67c00] text-gray-900 font-semibold py-3 px-8 rounded-lg hover:bg-yellow-500 transition duration-300 ml-auto">
+   <div className=" space-x-4" >
+          <Link to='/Get_A_Quote' className={`${btnClas}`}>
               Get a Quote
             </Link>
           </div>
@@ -94,6 +157,8 @@ const WebAppDev = () => {
         </motion.div>
       </motion.div>
     </section>
+    <LogoSliders sliderData={sliderData}/>
+    </>
   );
 };
 
