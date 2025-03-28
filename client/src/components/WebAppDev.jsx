@@ -3,68 +3,72 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { btnClas } from '../../constants/Colors';
 import LogoSliders from './LogoSliders';
+import { serviceSliders } from './serviceSliders';
 
-const sliderData = [
-  {
-    id: 1,
-    src: 'https://www.apptunix.com/blog/wp-content/uploads/sites/3/2019/10/mobile-apps-in-business-copy-5.jpg',
-    title: 'Mobile Apps'
-  },
-  {
-    id: 2,
-    src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSITiUDIxOHORHKvxMsniK1j8Bwfpmd0sLROg&s',
-    title: 'Ecommerce'
-  },
-  {
-    id: 3,
-    src: 'https://blog.dreamfactory.com/hubfs/Imported_Blog_Media/What-is-an-API-Integration.png',
-    title: 'Payment Integration'
-  },
-  {
-    id: 4,
-    src: 'https://cdn-ikpplpn.nitrocdn.com/rKfvbqixbjRUiVJszbkgQBRIwKbXWEuF/assets/images/optimized/rev-d592128/www.schgroup.com/wp-content/uploads/2024/04/ERP-Webpage-Graphic-1.png',
-    title: 'Erp Solution'
-  }
-  ,
-  {
-    id: 5,
-    src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBtrFZhWsmo1Dm46amYTr2eLwp_SsxxLVVxw&s',
-    title: 'Customized Bysiness Solutions'
-  }
-  ,
-  {
-    id: 6,
-    src: 'https://blog.dreamfactory.com/hubfs/Imported_Blog_Media/What-is-an-API-Integration.png',
-    title: 'Api Integration'
-  }
-  ,
-  {
-    id: 7,
-    src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWgSWqFdONwoBO8jSssXk68mt5xXo0gbiUwA&s',
-    title: 'POS'
-  }
-  ,
-  {
-    id: 8,
-    src: 'https://images-platform.99static.com//Ion7fKG2TbkDPFtKGAkZzhduHbQ=/0x0:1288x1288/fit-in/500x500/99designs-contests-attachments/75/75098/attachment_75098795',
-    title: 'Logistic '
-  }
-  ,
-  {
-    id: 9,
-    src: 'https://vestazone.com/assets/images/blogs/Why-Shop-at-Vesta-Zone/userfriendlywebsite.webp',
-    title: 'E Store'
-  }
-  ,
-  {
-    id: 10,
-    src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYZCNzLGmsLK_BEn8tWUT21UQhgEKf8W0IUg&s',
-    title: 'Logo 10'
-  }
-]
+// const sliderData = [
+//   {
+//     id: 1,
+//     src: 'https://www.apptunix.com/blog/wp-content/uploads/sites/3/2019/10/mobile-apps-in-business-copy-5.jpg',
+//     title: 'Mobile Apps'
+//   },
+//   {
+//     id: 2,
+//     src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSITiUDIxOHORHKvxMsniK1j8Bwfpmd0sLROg&s',
+//     title: 'Ecommerce'
+//   },
+//   {
+//     id: 3,
+//     src: 'https://blog.dreamfactory.com/hubfs/Imported_Blog_Media/What-is-an-API-Integration.png',
+//     title: 'Payment Integration'
+//   },
+//   {
+//     id: 4,
+//     src: 'https://cdn-ikpplpn.nitrocdn.com/rKfvbqixbjRUiVJszbkgQBRIwKbXWEuF/assets/images/optimized/rev-d592128/www.schgroup.com/wp-content/uploads/2024/04/ERP-Webpage-Graphic-1.png',
+//     title: 'Erp Solution'
+//   }
+//   ,
+//   {
+//     id: 5,
+//     src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBtrFZhWsmo1Dm46amYTr2eLwp_SsxxLVVxw&s',
+//     title: 'Customized Bysiness Solutions'
+//   }
+//   ,
+//   {
+//     id: 6,
+//     src: 'https://blog.dreamfactory.com/hubfs/Imported_Blog_Media/What-is-an-API-Integration.png',
+//     title: 'Api Integration'
+//   }
+//   ,
+//   {
+//     id: 7,
+//     src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWgSWqFdONwoBO8jSssXk68mt5xXo0gbiUwA&s',
+//     title: 'POS'
+//   }
+//   ,
+//   {
+//     id: 8,
+//     src: 'https://images-platform.99static.com//Ion7fKG2TbkDPFtKGAkZzhduHbQ=/0x0:1288x1288/fit-in/500x500/99designs-contests-attachments/75/75098/attachment_75098795',
+//     title: 'Logistic '
+//   }
+//   ,
+//   {
+//     id: 9,
+//     src: 'https://vestazone.com/assets/images/blogs/Why-Shop-at-Vesta-Zone/userfriendlywebsite.webp',
+//     title: 'E Store'
+//   }
+//   ,
+//   {
+//     id: 10,
+//     src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYZCNzLGmsLK_BEn8tWUT21UQhgEKf8W0IUg&s',
+//     title: 'Logo 10'
+//   }
+// ]
 
 
 const WebAppDev = () => {
+  // Get slider data from centralized source
+  const sliderData = serviceSliders.webAppDev.items;
+
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -157,7 +161,7 @@ const WebAppDev = () => {
           </motion.div>
         </motion.div>
       </section>
-      
+
       {/* Updated slider container */}
       <div className="w-full overflow-hidden px-0 mx-0">
         <LogoSliders sliderData={sliderData} />

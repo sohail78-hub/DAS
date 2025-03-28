@@ -3,56 +3,63 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { btnClas } from '../../constants/Colors';
 import LogoSliders from './LogoSliders';
+import { serviceSliders } from './serviceSliders';
 
-const sliderData=[
-  {
-    id: 1,
-    src: 'https://www.seobrand.com/wp-content/uploads/2024/03/What-are-SEO-Services.jpg',
-    title: 'SEO Services'
-  },
-  {
-    id: 2,
-    src: 'https://www.one-resource.com/wp-content/uploads/Social-media-management-%E2%80%93-small-business-know-how.png',
-    title: 'Social Media Management'
-  },
-  {
-    id: 3,
-    src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7v_tplgnFEKcWyqwkwL0Qd8G2a1DNE9e5qQ&s',
-    title: 'Meta Ads'
-  },
-  {
-    id: 4,
-    src: 'https://www.searchenginejournal.com/wp-content/uploads/2021/11/google-ads-insights-page-61967650b562e-sej.png',
-    title: 'Google Ads'
-  }
-  ,
-  {
-    id: 5,
-    src: 'https://media.licdn.com/dms/image/v2/D5612AQHnqP4GvpQnKQ/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1723018550857?e=2147483647&v=beta&t=VFtkQOy-jaherYlOpLsNX0dOnaidxcIb8mShr1dZKrw',
-    title: 'Business Promotion'
-  }
-  ,
-  {
-    id: 6,
-    src: 'https://media.licdn.com/dms/image/v2/C5612AQG2V0uc_r0ciA/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1617417923890?e=2147483647&v=beta&t=glHQ2YgBavB2cytxS66fqXQOUXXBoqfazvA_07QChcQ',
-    title: 'Brand Building'
-  }
-    ,
-    {
-        id: 7,
-        src: 'https://www.glueup.com/sites/default/files/image_1571.png',
-        title: 'Digital Business Consultation'
-    }
-    ,
-    {
-        id: 8,
-        src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuqnsk1Z5Z6qvlFXzwVc0UCaPfm-YiFIFWEA&s',
-        title: 'Content Creation'
-    }
 
-]
+
+// const sliderData=[
+//   {
+//     id: 1,
+//     src: 'https://www.seobrand.com/wp-content/uploads/2024/03/What-are-SEO-Services.jpg',
+//     title: 'SEO Services'
+//   },
+//   {
+//     id: 2,
+//     src: 'https://www.one-resource.com/wp-content/uploads/Social-media-management-%E2%80%93-small-business-know-how.png',
+//     title: 'Social Media Management'
+//   },
+//   {
+//     id: 3,
+//     src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7v_tplgnFEKcWyqwkwL0Qd8G2a1DNE9e5qQ&s',
+//     title: 'Meta Ads'
+//   },
+//   {
+//     id: 4,
+//     src: 'https://www.searchenginejournal.com/wp-content/uploads/2021/11/google-ads-insights-page-61967650b562e-sej.png',
+//     title: 'Google Ads'
+//   }
+//   ,
+//   {
+//     id: 5,
+//     src: 'https://media.licdn.com/dms/image/v2/D5612AQHnqP4GvpQnKQ/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1723018550857?e=2147483647&v=beta&t=VFtkQOy-jaherYlOpLsNX0dOnaidxcIb8mShr1dZKrw',
+//     title: 'Business Promotion'
+//   }
+//   ,
+//   {
+//     id: 6,
+//     src: 'https://media.licdn.com/dms/image/v2/C5612AQG2V0uc_r0ciA/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1617417923890?e=2147483647&v=beta&t=glHQ2YgBavB2cytxS66fqXQOUXXBoqfazvA_07QChcQ',
+//     title: 'Brand Building'
+//   }
+//     ,
+//     {
+//         id: 7,
+//         src: 'https://www.glueup.com/sites/default/files/image_1571.png',
+//         title: 'Digital Business Consultation'
+//     }
+//     ,
+//     {
+//         id: 8,
+//         src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuqnsk1Z5Z6qvlFXzwVc0UCaPfm-YiFIFWEA&s',
+//         title: 'Content Creation'
+//     }
+
+// ]
 
 const Digital_Marketing = () => {
+  // Get slider data for this service
+  const sliderData = serviceSliders.digitalMarketing.items;
+
+  // Animation variants remain unchanged
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -145,7 +152,7 @@ const Digital_Marketing = () => {
         </motion.div>
       </motion.div>
     </section>
-    
+
     {/* Updated slider container */}
     <div className="w-full overflow-hidden px-0 mx-0">
         <LogoSliders sliderData={sliderData} />
