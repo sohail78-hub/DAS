@@ -73,11 +73,11 @@ const Digital_Marketing_Outsourcing = () => {
   return (
     <>
     <section className="py-28 px-4 sm:px-6 lg:px-8">
-      <motion.div
-        className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
+        <motion.div
+          className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
       >
         <motion.div className="space-y-6" variants={itemVariants}>
           <h1 className="text-4xl lg:text-5xl font-bold text-white">
