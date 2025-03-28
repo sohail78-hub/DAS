@@ -145,6 +145,7 @@ const Digital_Marketing = () => {
         </motion.div>
       </motion.div>
     </section>
+    
     {/* Updated slider container */}
     <div className="w-full overflow-hidden px-0 mx-0">
         <LogoSliders sliderData={sliderData} />

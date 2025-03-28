@@ -72,7 +72,7 @@ const Digital_Marketing_Outsourcing = () => {
 
   return (
     <>
-    <section className="py-28 px-4 sm:px-6 lg:px-8">
+      <section className="py-28 px-4 sm:px-6 lg:px-8">
         <motion.div
           className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8"
           variants={containerVariants}
@@ -146,7 +146,11 @@ const Digital_Marketing_Outsourcing = () => {
         </motion.div>
       </motion.div>
     </section>
-    <LogoSliders sliderData={sliderData} />
+    
+     {/* Updated slider container */}
+     <div className="w-full overflow-hidden px-0 mx-0">
+        <LogoSliders sliderData={sliderData} />
+      </div>
     </>
   );
 };
