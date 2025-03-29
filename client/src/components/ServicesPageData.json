@@ -1,0 +1,130 @@
+{
+  "webAppDev": {
+    "title": "Web & App Development",
+    "subtitle": "Website That Drives Results — Let's Build!",
+    "description": [
+      "Transform your online presence with Marketist’s Web Design & Development! We craft stunning, SEO-friendly websites that captivate visitors and drive sales.",
+      "From dynamic e-commerce platforms to sleek informational sites, our tailored solutions ensure your brand stands out and converts leads into loyal customers.",
+      "Let’s build your digital success story now!"
+    ],
+    "features": [
+      {
+        "icon": "⚙️",
+        "title": "Business Website Design",
+        "description": "Perfect for small and medium businesses to showcase services, online presence & portfolio"
+      },
+      {
+        "icon": "🛒",
+        "title": "Ecommerce Store",
+        "description": "Sell your products online with our Ecommerce Web Solutions. Full Featured WordPress, Shopify or Custom Developed Store"
+      },
+      {
+        "icon": "📦",
+        "title": "Landing Page | 1 Page Web",
+        "description": "Perfect for Sales Funnel for Google Ads & Other Paid Ad Campaign"
+      },
+      {
+        "icon": "⚡",
+        "title": "Custom Solutions",
+        "description": "Backend can be in php, laravel, React Native. Front end will be in html, css & javascript"
+      }
+    ],
+    "sliderData": "serviceSliders.webAppDev.items"
+  },
+  "digitalMarketing": {
+    "title": "Digital Marketing",
+    "subtitle": "Boost Your Brand — Let’s Grow!",
+    "description": [
+      "Elevate your online presence with Marketist’s Digital Marketing solutions! We create data-driven strategies to increase your visibility and engagement.",
+      "From SEO to social media campaigns, our tailored approaches ensure your brand reaches the right audience and converts clicks into customers.",
+      "Let’s amplify your digital growth today!"
+    ],
+    "features": [
+      {
+        "icon": "🔍",
+        "title": "SEO Services",
+        "description": "Rank higher on search engines with our expert SEO strategies, driving organic traffic to your site"
+      },
+      {
+        "icon": "📱",
+        "title": "Social Media Marketing",
+        "description": "Engage your audience on platforms like Instagram, Facebook, and LinkedIn with targeted campaigns"
+      },
+      {
+        "icon": "📈",
+        "title": "PPC Campaigns",
+        "description": "Maximize ROI with our Pay-Per-Click advertising on Google Ads and other platforms"
+      },
+      {
+        "icon": "✍️",
+        "title": "Content Marketing",
+        "description": "Build trust and authority with high-quality blogs, videos, and infographics tailored to your audience"
+      }
+    ],
+    "sliderData": "serviceSliders.digitalMarketing.items"
+  },
+  "designDevelopment": {
+    "title": "Design & Development",
+    "subtitle": "Create Stunning Solutions — Let’s Innovate!",
+    "description": [
+      "Bring your ideas to life with Marketist’s Design & Development services! We combine creativity and technology to deliver visually stunning and highly functional solutions.",
+      "From UI/UX design to full-stack development, our team ensures your project is both beautiful and efficient, tailored to meet your business goals.",
+      "Let’s craft your next big thing—start today!"
+    ],
+    "features": [
+      {
+        "icon": "🎨",
+        "title": "UI/UX Design",
+        "description": "Create intuitive and visually appealing interfaces that enhance user experience"
+      },
+      {
+        "icon": "💻",
+        "title": "Front-End Development",
+        "description": "Build responsive and interactive user interfaces using React, HTML, CSS, and JavaScript"
+      },
+      {
+        "icon": "🛠️",
+        "title": "Back-End Development",
+        "description": "Develop robust server-side solutions with Node.js, Laravel, or Python"
+      },
+      {
+        "icon": "🧪",
+        "title": "Prototyping & Testing",
+        "description": "Validate your ideas with prototypes and ensure quality through rigorous testing"
+      }
+    ],
+    "sliderData": "serviceSliders.designDevelopment.items"
+  },
+  "outsourcing": {
+    "title": "Digital Marketing Outsourcing",
+    "subtitle": "Scale Your Growth — Let’s Partner!",
+    "description": [
+      "Outsource your digital marketing with Marketist and focus on what you do best! We provide expert solutions to boost your online presence while saving you time and resources.",
+      "From strategy to execution, our team handles everything, ensuring your brand thrives in the digital landscape with measurable results.",
+      "Let’s take your marketing to the next level—partner with us today!"
+    ],
+    "features": [
+      {
+        "icon": "📊",
+        "title": "Full Campaign Management",
+        "description": "Comprehensive management of your digital campaigns, from planning to optimization"
+      },
+      {
+        "icon": "📉",
+        "title": "Analytics & Reporting",
+        "description": "Detailed insights and reports to track performance and ROI of your marketing efforts"
+      },
+      {
+        "icon": "💻",
+        "title": "Ad Management",
+        "description": "Expert handling of Google Ads, social media ads, and other paid campaigns for maximum impact"
+      },
+      {
+        "icon": "🤝",
+        "title": "Dedicated Support",
+        "description": "A dedicated team to support your marketing needs, ensuring seamless collaboration"
+      }
+    ],
+    "sliderData": "serviceSliders.outsourcing.items"
+  }
+}
