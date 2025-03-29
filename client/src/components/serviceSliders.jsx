@@ -251,7 +251,6 @@ export const serviceSliders = {
     }
   };
   
-  // SEO-friendly tag groupings
   export const seoTags = {
     'digital-marketing': [
       'seo-services', 'social-media-management', 
@@ -270,3 +269,4 @@ export const serviceSliders = {
       'digital-marketing-agency'
     ]
   };
+  

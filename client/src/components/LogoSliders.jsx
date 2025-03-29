@@ -44,7 +44,7 @@ const LogoSliders = ({ sliderData }) => {
                     e.target.src = 'https://via.placeholder.com/150';
                   }}
                 />
-                <div className="absolute bottom-0 left-0 right-0 bg-black/60 p-1">
+                <div className="absolute bottom-0 h-full py-10 left-0 right-0 bg-black/60 p-1">
                   <h3 className="text-xs font-medium text-white text-center truncate">
                     {item.title}
                   </h3>
