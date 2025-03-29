@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const ServicesSection = () => {
+  
   const services = [
     { id: 1, icon: '📈', title: 'Digital Marketing', description: 'SEO, PPC, Social Media strategies to grow your business.', cta: 'Learn More' },
     { id: 2, icon: '💻', title: 'Web Development', description: 'Custom Websites, CMS Solutions, and E-commerce platforms.', cta: 'Learn More' },
