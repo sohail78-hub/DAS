@@ -13,6 +13,7 @@ import Digital_Marketing from './components/Digital_Marketing'
 import Design_Development from './components/Design_Development'
 import Digital_Marketing_Outsourcing from './components/Digital_Marketing_Outsourcing'
 import Get_A_Quote from './components/Get_A_Quote'
+import PortfolioHero from './components/PortfolioHero'
 
 const App = () => {
   return (
@@ -27,6 +28,8 @@ const App = () => {
         <Route path='/Digital_Marketing_Outsourcing' element={<Digital_Marketing_Outsourcing/>}/>
         <Route path='/Design_&_Development' element={<Design_Development/>}/>
         <Route path='/Get_A_Quote' element={<Get_A_Quote/>}/>
+        <Route path='/portfolio' element={<PortfolioHero/>}/>
+
 
       </Routes>
       <Footer/>

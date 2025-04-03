@@ -6,8 +6,19 @@ const QuoteForm = () => {
     name: '',
     email: '',
     company: '',
-    message: ''
+    message: '',
+    number:null,
+    service:''
   });
+
+  const services = [
+    'Web & App Development',
+    'Digital Marketing',
+    'Design & Development',
+    'Digital Marketing Outsourcing',
+    'Others'
+  ];
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -64,6 +75,41 @@ const QuoteForm = () => {
               required
             />
           </div>
+
+          <div>
+            <motion.input
+              variants={inputVariants}
+              whileFocus="focus"
+              type="phone"
+              name="phone"
+              value={formData.number}
+              onChange={handleChange}
+              placeholder="Your number"
+              className="w-full px-4 py-2 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+
+          <div>
+            <motion.select 
+            variants={inputVariants}
+            whileFocus="focus"
+            name="service"
+            value={formData.service}
+            onChange={handleChange}
+            className="w-full px-4 py-2 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          >
+            <option disabled hidden value='' >
+              Select Required Service
+            </option>
+            {services.map((service, index) => (
+                <option key={index} value={service}>{service}</option>
+              ))}
+            </motion.select>
+          </div>
+
+
 
           <div>
             <motion.input

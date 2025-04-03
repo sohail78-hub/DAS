@@ -3,6 +3,7 @@ import HeroSection from './Hero'
 import ServicesSection from './Services'
 import Contact from './Contact'
 import AboutUs from './About'
+import PortfolioHero from './PortfolioHero'
 
 const Home = () => {
   return (

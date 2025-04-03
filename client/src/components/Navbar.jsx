@@ -45,6 +45,7 @@ const Navbar = () => {
     {
       id: 'services',
       label: 'Services',
+      path: '/services',
       submenu: [
         { 
           id: 'Web_&_App_Development', 
@@ -72,11 +73,10 @@ const Navbar = () => {
         },
       ],
     },
-
     {
       id: 'about',
-      // icon: '👤',
       label: 'About',
+      path: '/about',
       submenu: [
         { id: 'team', icon: '👥', label: 'Our Team' },
         { id: 'mission', icon: '🎯', label: 'Mission' },
@@ -86,8 +86,8 @@ const Navbar = () => {
     },
     {
       id: 'contact',
-      // icon: '❓',
       label: 'Contact',
+      path: '/contact',
       submenu: [
         { id: 'email', icon: '✉️', label: 'Email' },
         { id: 'phone', icon: '📞', label: 'Phone' },
@@ -97,8 +97,8 @@ const Navbar = () => {
     },
     {
       id: 'portfolio',
-      // icon: '📁',
       label: 'Portfolio',
+      path: '/portfolio',
       submenu: [
         { id: 'projects', icon: '🏗️', label: 'Projects' },
         { id: 'case-studies', icon: '📊', label: 'Case Studies' },
@@ -150,6 +150,7 @@ const Navbar = () => {
       },
     },
   };
+
   const submenuItemVariants = {
     hidden: { opacity: 0, x: -20 },
     visible: {
@@ -205,107 +206,107 @@ const Navbar = () => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <Link to='/' >
-          <motion.div
-            className="mr-4 flex items-center"
-            variants={logoVariants}
-            initial="initial"
-            animate="animate"
-            whileHover="hover"
-          >
-            <img src="/da-log.png" alt="Logo" className="h-16 w-auto" />
-          </motion.div>
+          <Link to='/'>
+            <motion.div
+              className="mr-4 flex items-center"
+              variants={logoVariants}
+              initial="initial"
+              animate="animate"
+              whileHover="hover"
+            >
+              <img src="/da-log.png" alt="Logo" className="h-16 w-auto" />
+            </motion.div>
           </Link>
 
           <div className="flex-1 flex items-center">
             {getVisibleMenuItems().map((item) => (
-              <motion.button
-                key={item.id}
-                className={`flex items-center gap-2 px-3 py-1 rounded-md transition-colors duration-200 ${
-                  activeMenu === item.id ? 'bg-gray-700' : ''
-                }`}
-                onMouseEnter={() => setActiveMenu(item.id)}
-                onMouseLeave={() => {
-                  if (!item.submenu) {
-                    setActiveMenu(null);
-                  }
-                }}
-                variants={menuButtonVariants}
-                initial="initial"
-                whileHover={{
-                  scale: 1.05,
-                  backgroundColor: menuColors[item.id] + '44',
-                  transition: { duration: 0.2 },
-                }}
-                whileTap="tap"
-                layout
-                style={{
-                  backgroundColor: activeMenu === item.id ? menuColors[item.id] + '66' : '',
-                }}
-              >
-                <motion.span
-                  animate={{ rotate: activeMenu === item.id ? [0, -10, 10, -10, 0] : 0 }}
-                  transition={{ duration: 0.5 }}
+              <Link to={item.path} key={item.id}>
+                <motion.button
+                  className={`flex items-center gap-2 px-3 py-1 rounded-md transition-colors duration-200 ${
+                    activeMenu === item.id ? 'bg-gray-700' : ''
+                  }`}
+                  onMouseEnter={() => setActiveMenu(item.id)}
+                  onMouseLeave={() => {
+                    if (!item.submenu) {
+                      setActiveMenu(null);
+                    }
+                  }}
+                  variants={menuButtonVariants}
+                  initial="initial"
+                  whileHover={{
+                    scale: 1.05,
+                    backgroundColor: menuColors[item.id] + '44',
+                    transition: { duration: 0.2 },
+                  }}
+                  whileTap="tap"
+                  layout
+                  style={{
+                    backgroundColor: activeMenu === item.id ? menuColors[item.id] + '66' : '',
+                  }}
                 >
-                  {item.icon}
-                </motion.span>
-                <span>{item.label}</span>
-              </motion.button>
+                  <motion.span
+                    animate={{ rotate: activeMenu === item.id ? [0, -10, 10, -10, 0] : 0 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    {item.icon}
+                  </motion.span>
+                  <span>{item.label}</span>
+                </motion.button>
+              </Link>
             ))}
           </div>
         </motion.div>
 
         <AnimatePresence>
-        {activeMenu && menuItems.find((item) => item.id === activeMenu)?.submenu && (
-          <motion.div
-            className="absolute top-[100%] -mt-2 p-4 bg-[#eae5d7] rounded-xl text-gray-900 shadow-lg z-10 overflow-hidden"
-            style={{ marginBottom: '20px' }}
-            onMouseEnter={() => {
-              clearTimeout(timeoutRef.current);
-              setHovered(true);
-            }}
-            onMouseLeave={() => {
-              timeoutRef.current = setTimeout(() => {
-                setHovered(false);
-                setActiveMenu(null);
-              }, 200);
-            }}
-            variants={submenuVariants}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            key={activeMenu}
-            style={{
-              width: '400px',
-              borderTop: `3px solid ${menuColors[activeMenu]}`,
-            }}
-          >
-            <div className="flex flex-col gap-3">
-              {menuItems
-                .find((item) => item.id === activeMenu)
-                .submenu.map((subItem, index) => (
-                  <motion.div
-                    key={subItem.id}
-                    variants={submenuItemVariants}
-                    custom={index}
-                  >
-                    <Link
-                      to={subItem.path}
-                      className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors duration-200 text-left hover:bg-gray-300"
-                      onClick={() => setActiveMenu(null)}
+          {activeMenu && menuItems.find((item) => item.id === activeMenu)?.submenu && (
+            <motion.div
+              className="absolute top-[100%] -mt-2 p-4 bg-[#eae5d7] rounded-xl text-gray-900 shadow-lg z-10 overflow-hidden"
+              style={{ marginBottom: '20px' }}
+              onMouseEnter={() => {
+                clearTimeout(timeoutRef.current);
+                setHovered(true);
+              }}
+              onMouseLeave={() => {
+                timeoutRef.current = setTimeout(() => {
+                  setHovered(false);
+                  setActiveMenu(null);
+                }, 200);
+              }}
+              variants={submenuVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              key={activeMenu}
+              style={{
+                width: '400px',
+                borderTop: `3px solid ${menuColors[activeMenu]}`,
+              }}
+            >
+              <div className="flex flex-col gap-3">
+                {menuItems
+                  .find((item) => item.id === activeMenu)
+                  .submenu.map((subItem, index) => (
+                    <motion.div
+                      key={subItem.id}
+                      variants={submenuItemVariants}
+                      custom={index}
                     >
-                      <span className="w-6 h-6 flex items-center justify-center bg-gray-700 rounded-md">
-                        {subItem.icon}
-                      </span>
-                      <span>{subItem.label}</span>
-                    </Link>
-                  </motion.div>
-                ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
+                      <Link
+                        to={subItem.path}
+                        className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors duration-200 text-left hover:bg-gray-300"
+                        onClick={() => setActiveMenu(null)}
+                      >
+                        <span className="w-6 h-6 flex items-center justify-center bg-gray-700 rounded-md">
+                          {subItem.icon}
+                        </span>
+                        <span>{subItem.label}</span>
+                      </Link>
+                    </motion.div>
+                  ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
     </>
   );
