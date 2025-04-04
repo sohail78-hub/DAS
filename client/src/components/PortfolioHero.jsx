@@ -61,7 +61,7 @@ const PortfolioHero = () => {
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold">
           <span className="text-white">SERVICES</span>
-          <span className="text-blue-500"> PORTFOLIO</span>
+          <span className="text-blue-500"> OUR PORTFOLIO</span>
         </h2>
       </div>
 
