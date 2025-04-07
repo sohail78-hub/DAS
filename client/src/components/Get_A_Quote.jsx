@@ -43,6 +43,7 @@ const QuoteForm = () => {
         transition={{ duration: 0.5 }}
         className="w-full max-w-md bg-gray-900 rounded-lg shadow-xl p-6"
       >
+        
         <h2 className="text-2xl font-bold text-white mb-6 text-center">
           Get a Quote
         </h2>

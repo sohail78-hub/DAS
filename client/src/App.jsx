@@ -30,7 +30,6 @@ const App = () => {
         <Route path='/Get_A_Quote' element={<Get_A_Quote/>}/>
         <Route path='/portfolio' element={<PortfolioHero/>}/>
 
-
       </Routes>
       <Footer/>
 
